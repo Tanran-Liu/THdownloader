@@ -1,0 +1,42 @@
+2025-09-05 15:31:09,478 - download.async_downloader - INFO - OSS连接成功
+2025-09-05 15:31:28,262 - mysql.connector - INFO - package: mysql.connector.plugins
+2025-09-05 15:31:28,263 - mysql.connector - INFO - plugin_name: mysql_native_password
+2025-09-05 15:31:28,276 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2025-09-05 15:31:32,350 - download.async_downloader - INFO - OSS连接成功
+2025-09-05 15:31:32,418 - download.async_downloader - INFO - 数据表时间范围: 2025-09-01 00:00:00 到 2025-09-30 23:59:59
+2025-09-05 15:31:32,425 - download.async_downloader - INFO - [10.0%] 正在处理设备 2594 (1/1)
+2025-09-05 15:31:39,641 - urllib3.connectionpool - WARNING - Connection pool is full, discarding connection: iot-datas.oss-cn-beijing.aliyuncs.com. Connection pool size: 10
+2025-09-05 15:31:39,862 - urllib3.connectionpool - WARNING - Connection pool is full, discarding connection: iot-datas.oss-cn-beijing.aliyuncs.com. Connection pool size: 10
+2025-09-05 15:31:39,871 - urllib3.connectionpool - WARNING - Connection pool is full, discarding connection: iot-datas.oss-cn-beijing.aliyuncs.com. Connection pool size: 10
+2025-09-05 15:31:39,917 - urllib3.connectionpool - WARNING - Connection pool is full, discarding connection: iot-datas.oss-cn-beijing.aliyuncs.com. Connection pool size: 10
+2025-09-05 15:31:39,950 - urllib3.connectionpool - WARNING - Connection pool is full, discarding connection: iot-datas.oss-cn-beijing.aliyuncs.com. Connection pool size: 10
+2025-09-05 15:31:40,051 - urllib3.connectionpool - WARNING - Connection pool is full, discarding connection: iot-datas.oss-cn-beijing.aliyuncs.com. Connection pool size: 10
+2025-09-05 15:31:40,108 - urllib3.connectionpool - WARNING - Connection pool is full, discarding connection: iot-datas.oss-cn-beijing.aliyuncs.com. Connection pool size: 10
+2025-09-05 15:31:40,149 - urllib3.connectionpool - WARNING - Connection pool is full, discarding connection: iot-datas.oss-cn-beijing.aliyuncs.com. Connection pool size: 10
+2025-09-05 15:31:40,153 - download.async_downloader - INFO - [90.0%] 正在打包ZIP文件...
+2025-09-05 15:31:42,582 - download.async_downloader - INFO - ZIP文件已创建: tmp\device_data_20250905_153140.zip
+2025-09-05 15:31:42,585 - download.async_downloader - INFO - [100.0%] Download completed
+2026-01-04 15:05:03,312 - download.async_downloader - INFO - OSS连接成功
+2026-01-04 15:05:36,174 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-01-04 15:05:36,175 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-01-04 15:05:36,188 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-01-04 15:05:37,357 - download.async_downloader - INFO - OSS连接成功
+2026-01-04 15:05:37,361 - download.async_downloader - INFO - 数据表时间范围: 2025-12-01 00:00:00 到 2026-01-31 23:59:59
+2026-01-04 15:05:37,367 - download.async_downloader - INFO - [10.0%] downloading: 103 (1/1)
+2026-01-04 15:05:37,807 - download.async_downloader - INFO - [100.0%] Download completed
+2026-01-04 15:06:12,802 - download.async_downloader - INFO - OSS连接成功
+2026-01-04 15:06:12,831 - download.async_downloader - INFO - 数据表时间范围: 2025-12-01 00:00:00 到 2026-01-31 23:59:59
+2026-01-04 15:06:12,833 - download.async_downloader - INFO - [10.0%] downloading: 103 (1/1)
+2026-01-04 15:06:13,274 - download.async_downloader - INFO - [100.0%] Download completed
+2026-01-04 15:06:46,157 - download.async_downloader - INFO - OSS连接成功
+2026-01-04 15:06:46,164 - download.async_downloader - INFO - 数据表时间范围: 2022-01-01 00:00:00 到 2022-12-31 23:59:59
+2026-01-04 15:06:46,170 - download.async_downloader - INFO - [10.0%] downloading: 103 (1/1)
+2026-01-04 15:06:51,969 - download.async_downloader - INFO - [100.0%] Download completed
+2026-01-04 15:08:14,064 - download.async_downloader - INFO - OSS连接成功
+2026-01-04 15:08:14,077 - download.async_downloader - INFO - 数据表时间范围: 2022-01-01 00:00:00 到 2024-12-31 23:59:59
+2026-01-04 15:08:14,087 - download.async_downloader - INFO - [10.0%] downloading: 103 (1/1)
+2026-01-04 15:08:59,076 - download.async_downloader - INFO - [100.0%] Download completed
+2026-01-04 15:28:53,018 - download.async_downloader - INFO - OSS连接成功
+2026-01-04 15:28:53,034 - download.async_downloader - INFO - 数据表时间范围: 2022-06-01 00:00:00 到 2024-12-31 23:59:59
+2026-01-04 15:28:53,041 - download.async_downloader - INFO - [10.0%] downloading: 103 (1/1)
+2026-01-04 15:29:05,162 - download.async_downloader - INFO - [100.0%] Download completed

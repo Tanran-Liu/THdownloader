@@ -1,0 +1,16 @@
+[project]
+name = "download-tui"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "mysql-connector-python>=9.3.0",
+    "openpyxl>=3.1.5",
+    "oss2>=2.19.1",
+    "pandas>=2.3.1",
+    "python-dotenv>=1.0.1",
+    "pillow>=11.3.0",
+    "pyinstaller>=6.15.0",
+    "ttkthemes>=3.2.2",
+]
