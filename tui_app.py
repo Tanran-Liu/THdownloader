@@ -91,6 +91,67 @@ class DownloadProgressWidget:
         self.message_var.set("准备中...")
         self.enable_cancel_button(False)
 
+# v2.3.5+
+class ScrollableFrame(ttk.Frame):
+    """
+    垂直滚动容器：Canvas + Scrollbar + 内部 content Frame
+    用法：
+        sf = ScrollableFrame(parent)
+        sf.pack(fill=tk.BOTH, expand=True)
+        # 把组件 pack 到 sf.content 里
+    """
+    def __init__(self, parent, *args, **kwargs):
+        super().__init__(parent, *args, **kwargs)
+
+        self.canvas = tk.Canvas(self, highlightthickness=0)
+        self.vbar = ttk.Scrollbar(self, orient="vertical", command=self.canvas.yview)
+        self.canvas.configure(yscrollcommand=self.vbar.set)
+
+        self.vbar.pack(side=tk.RIGHT, fill=tk.Y)
+        self.canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+
+        # 内部实际放内容的 Frame
+        self.content = ttk.Frame(self.canvas)
+        self._win_id = self.canvas.create_window((0, 0), window=self.content, anchor="nw")
+
+        # 内容大小变化 -> 更新滚动区域
+        self.content.bind("<Configure>", self._on_content_configure)
+        # 画布大小变化 -> 让 content 跟随宽度
+        self.canvas.bind("<Configure>", self._on_canvas_configure)
+
+        # 鼠标滚轮（进入/离开绑定）
+        self.content.bind("<Enter>", self._bind_mousewheel)
+        self.content.bind("<Leave>", self._unbind_mousewheel)
+
+    def _on_content_configure(self, _evt=None):
+        self.canvas.configure(scrollregion=self.canvas.bbox("all"))
+
+    def _on_canvas_configure(self, _evt=None):
+        # 让内部 frame 宽度 = canvas 可视宽度
+        self.canvas.itemconfigure(self._win_id, width=self.canvas.winfo_width())
+
+    def _bind_mousewheel(self, _evt=None):
+        # Windows / macOS
+        self.canvas.bind_all("<MouseWheel>", self._on_mousewheel)
+        # Linux
+        self.canvas.bind_all("<Button-4>", self._on_mousewheel_linux)
+        self.canvas.bind_all("<Button-5>", self._on_mousewheel_linux)
+
+    def _unbind_mousewheel(self, _evt=None):
+        self.canvas.unbind_all("<MouseWheel>")
+        self.canvas.unbind_all("<Button-4>")
+        self.canvas.unbind_all("<Button-5>")
+
+    def _on_mousewheel(self, event):
+        # event.delta: Windows 一般是 ±120 的倍数；mac 可能是小值
+        step = int(-1 * (event.delta / 120)) if event.delta else 0
+        self.canvas.yview_scroll(step, "units")
+
+    def _on_mousewheel_linux(self, event):
+        if event.num == 4:
+            self.canvas.yview_scroll(-1, "units")
+        elif event.num == 5:
+            self.canvas.yview_scroll(1, "units")
 
 # class DeviceSelectionWidget:
 #     """设备选择组件"""
@@ -2199,18 +2260,18 @@ class DownloadManagerApp:
         main_frame = ttk.Frame(self.root, padding="10")
         main_frame.pack(fill=tk.BOTH, expand=True)
 
-        # 两列：左工具面板 / 右日志
-        left_frame = ttk.Frame(main_frame)
-        left_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=(0, 10))
+        # # 两列：左工具面板 / 右日志
+        # left_frame = ttk.Frame(main_frame)
+        # left_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=(0, 10))
 
-        right_frame = ttk.Frame(main_frame)
-        right_frame.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True)
+        # right_frame = ttk.Frame(main_frame)
+        # right_frame.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True)
 
         # ========== 左侧：工具面板 ==========
-        left_title = ttk.Label(left_frame, text="运维工具", font=("TkDefaultFont", 12, "bold"))
+        left_title = ttk.Label(main_frame, text="运维工具", font=("TkDefaultFont", 12, "bold"))
         left_title.pack(anchor=tk.W, pady=(0, 10))
 
-        notebook = ttk.Notebook(left_frame)
+        notebook = ttk.Notebook(main_frame)
         notebook.pack(fill=tk.BOTH, expand=True)
 
         tab_download = ttk.Frame(notebook)
@@ -2235,9 +2296,14 @@ class DownloadManagerApp:
         # config_container = ttk.Frame(tab_download)
         # config_container.pack(fill=tk.BOTH, expand=True)
 
-        # v2.3.3+
-        config_container = ttk.Frame(download_left)
-        config_container.pack(fill=tk.BOTH, expand=True)
+        # v2.3.5+
+        config_scroll = ScrollableFrame(download_left)
+        config_scroll.pack(fill=tk.BOTH, expand=True)
+        config_container = config_scroll.content  #之后所有组件都 pack 到这里
+        # v2.3.5-
+        # # v2.3.3+
+        # config_container = ttk.Frame(download_left)
+        # config_container.pack(fill=tk.BOTH, expand=True)
 
         # v2.3.3+
         status_label = ttk.Label(download_right, text="状态和日志", font=("TkDefaultFont", 12, "bold"))

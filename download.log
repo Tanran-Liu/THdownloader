@@ -4257,3 +4257,7 @@ RuntimeError: bcrypt 未安装：请先安装 bcrypt
 2026-01-22 15:18:38,316 - download.async_downloader - INFO - [100.0%] Download completed
 2026-01-22 15:20:44,827 - download.async_downloader - INFO - OSS连接成功
 2026-01-22 15:42:28,753 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 16:31:00,647 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 16:38:29,246 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 16:40:50,351 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 16:48:24,251 - download.async_downloader - INFO - OSS连接成功

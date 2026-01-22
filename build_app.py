@@ -26,7 +26,7 @@ def clean_build_dirs():
 
 def build_app():
     """打包应用"""
-    print("开始打包设备数据下载器...")
+    print("开始打包运维工具...")
     
     # 清理之前的构建文件
     clean_build_dirs()
@@ -36,7 +36,7 @@ def build_app():
         'main.py',
         '--onefile',
         '--windowed',
-        '--name=设备数据下载器',
+        '--name=运维工具',
         
         # 添加数据文件
         '--add-data=config;config',
@@ -125,7 +125,7 @@ def build_app():
         PyInstaller.__main__.run(args)
         
         # 检查结果
-        exe_path = Path('dist/设备数据下载器.exe')
+        exe_path = Path('dist/运维工具.exe')
         if exe_path.exists():
             print(f"\n✓ 打包成功!")
             print(f"可执行文件位置: {exe_path.absolute()}")
@@ -141,7 +141,7 @@ def build_app():
 
 def main():
     """主函数"""
-    print("设备数据下载器 - PyInstaller打包工具")
+    print("运维工具 - PyInstaller打包工具")
     print("=" * 50)
     
     if build_app():
@@ -151,7 +151,7 @@ def main():
         try:
             response = input("\n是否运行生成的exe文件进行测试? (y/n): ").strip().lower()
             if response in ['y', 'yes', '是']:
-                exe_path = Path('dist/设备数据下载器.exe')
+                exe_path = Path('dist/运维工具.exe')
                 if exe_path.exists():
                     print("启动应用...")
                     os.startfile(str(exe_path))
