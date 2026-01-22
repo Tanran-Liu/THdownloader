@@ -18,6 +18,11 @@ from tkinter import ttk, messagebox, filedialog, scrolledtext
 from typing import List, Optional, Tuple, Dict, Callable, Any
 import sys
 import os
+import re
+
+# v2.3.3+
+# ===== 功能开关（默认更安全）=====
+ENABLE_HARD_UNBIND_DELETE = True
 
 from download.async_downloader import AsyncDeviceDataDownloader, DownloadError
 from download.db import (
@@ -326,7 +331,13 @@ class DeviceNameSelectionWidget:
     MAX_VISIBLE = 10
     MIN_WIDTH = 500
 
-    def __init__(self, parent):
+    # v2.3.4-
+    # def __init__(self, parent):
+
+    # v2.3.4+
+    def __init__(self, parent, on_change: Optional[Callable[[], None]] = None):
+        self._on_change = on_change
+
         self.parent = parent
         # v2.2.1 决定复用通用下拉组件AutoCompletePopup所以停用的代码
         #self._debounce_after_id = None
@@ -697,6 +708,10 @@ class DeviceNameSelectionWidget:
             self._picked_device_id = None
             self.keyword_var.set("")
             self._ac.hide()
+            # v2.3.4+
+            if self._on_change:
+                self._on_change()
+
             return
         # 2) 用户直接输入 ID
         if text.isdigit():
@@ -710,6 +725,11 @@ class DeviceNameSelectionWidget:
                 self._refresh_selected_list()
                 self.keyword_var.set("")
                 self._ac.hide()
+
+                # v2.3.4+
+                if self._on_change:
+                    self._on_change()
+
                 return
         # 3) 用户输入完整名称（精确匹配）
         try:
@@ -722,6 +742,11 @@ class DeviceNameSelectionWidget:
             self._refresh_selected_list()
             self.keyword_var.set("")
             self._ac.hide()
+
+            # v2.3.4+
+            if self._on_change:
+                self._on_change()
+
             return
         # 4) 兜底：不唯一/找不到
         self._ac.hide()
@@ -733,6 +758,9 @@ class DeviceNameSelectionWidget:
         self._refresh_selected_list()
         self.status_var.set("已清空已选设备")
         self.status_label.config(foreground="green")
+        # v2.3.4+
+        if self._on_change:
+            self._on_change()
 
     def _refresh_selected_list(self):
         self.listbox.delete(0, "end")
@@ -975,6 +1003,13 @@ class DeviceConfigQueryWidget:
 
         threading.Thread(target=worker, daemon=True).start()
 
+# v2.3.3+邮箱校验函数
+def _is_valid_email(email: str) -> bool:
+    e = (email or "").strip()
+    if not e:
+        return True  # 允许空
+    return bool(re.match(r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$", e))
+
 # v2.3.1+ 添加用户增删改查功能（CRUD）
 class UserAdminWidget:
     """
@@ -1050,7 +1085,10 @@ class UserAdminWidget:
             return e
 
         _row("Name", self.name_var)
-        _row("Phone", self.phone_var)
+        # v2.3.3+
+        self.phone_entry = _row("Phone", self.phone_var)
+        # v2.3.3-
+        # _row("Phone", self.phone_var)
         _row("Email", self.email_var)
         _row("Password", self.pw_var, show="*")
 
@@ -1078,13 +1116,49 @@ class UserAdminWidget:
         ttk.Label(bind, text="当前绑定（选中后可解绑：物理删除）").pack(anchor=tk.W, pady=(6, 0))
         self.bind_listbox = tk.Listbox(bind, height=8)
         self.bind_listbox.pack(fill=tk.BOTH, expand=True, pady=(6, 6))
+        self.bind_listbox.bind("<<ListboxSelect>>", lambda e: self._update_action_states())
 
-        ttk.Button(bind, text="解绑（删除该绑定）", command=self.on_unbind_device).pack(anchor=tk.E)
+        # v2.3.3+
+        self.btn_unbind = ttk.Button(bind, text="解绑（删除该绑定）", command=self.on_unbind_device)
+        self.btn_unbind.pack(anchor=tk.E)
+
+        # v2.3.3- 不再进行ENABLE_HARD_UNBIND_DELETE（设备绑定删除安全控制）检查
+        # if not ENABLE_HARD_UNBIND_DELETE:
+        #     self.btn_unbind.config(state=tk.DISABLED)
+        #     ttk.Label(bind, text="解绑功能默认禁用（设置 TH_ENABLE_HARD_UNBIND_DELETE=1 可启用）").pack(anchor=tk.W,
+        #                                                                                               pady=(6, 0))
+        # v2.3.3-
+        # ttk.Button(bind, text="解绑（删除该绑定）", command=self.on_unbind_device).pack(anchor=tk.E)
 
         # 缓存：搜索结果 users
         self._users_cache: List[Dict[str, Any]] = []
 
+        # V2.3.3+
+        # 默认：创建模式（未选中用户）
+        self._set_mode(False)
+        self._update_action_states()
+
     # ---------- UI 辅助 ----------
+    def _update_action_states(self):
+        """根据当前是否选中用户/是否选中绑定，自动启用/禁用按钮"""
+        has_user = bool((self.user_id_var.get() or "").strip().isdigit())
+
+        # 创建/更新按钮逻辑
+        self.btn_create.config(state=(tk.DISABLED if has_user else tk.NORMAL))
+        self.btn_update.config(state=(tk.NORMAL if has_user else tk.DISABLED))
+
+        # 解绑按钮逻辑：受功能开关 + 用户选中 + 绑定选中 三重条件控制
+        if not hasattr(self, "btn_unbind") or self.btn_unbind is None:
+            return
+
+        # v2.3.3- 不再进行ENABLE_HARD_UNBIND_DELETE（设备绑定删除安全控制）检查
+        # if not ENABLE_HARD_UNBIND_DELETE:
+        #     self.btn_unbind.config(state=tk.DISABLED)
+        #     return
+
+        has_binding_selected = bool(self.bind_listbox.curselection())
+        self.btn_unbind.config(state=(tk.NORMAL if (has_user and has_binding_selected) else tk.DISABLED))
+
     def set_status(self, msg: str, ok: Optional[bool] = None):
         self.status_var.set(msg)
         if ok is True:
@@ -1094,17 +1168,59 @@ class UserAdminWidget:
         else:
             self.status_label.config(foreground="black")
 
+    # v2.3.3+
+    def _set_phone_editable(self, editable: bool):
+        """
+        控制 phone 输入框是否可编辑：
+        - editable=True  => normal（创建用户时）
+        - editable=False => readonly（更新用户时禁止修改，但允许复制）
+        """
+        if not hasattr(self, "phone_entry") or self.phone_entry is None:
+            return
+        try:
+            self.phone_entry.config(state=("normal" if editable else "readonly"))
+        except Exception:
+            # 兜底：如果 ttk.Entry 在某些主题下不接受 readonly，再退回 disabled
+            try:
+                self.phone_entry.config(state=("normal" if editable else "disabled"))
+            except Exception:
+                pass
+
+    # v2.3.3+
+    def _set_mode(self, selected: bool):
+        """
+        selected=True  => 选中用户（编辑模式）
+        selected=False => 未选中用户（创建模式）
+        """
+        if selected:
+            # 编辑模式：禁用创建，启用更新
+            self.btn_create.config(state=tk.DISABLED)
+            self.btn_update.config(state=tk.NORMAL)
+            self._set_phone_editable(False)
+        else:
+            # 创建模式：启用创建，禁用更新
+            self.btn_create.config(state=tk.NORMAL)
+            self.btn_update.config(state=tk.DISABLED)
+            self._set_phone_editable(True)
+
     def clear_form(self):
         logger.info("[USER_ADMIN][UI] clear_form")
         self._selected_user = None
+        self.search_var.set("")
         self.user_id_var.set("")
         self.name_var.set("")
         self.phone_var.set("")
         self.email_var.set("")
         self.pw_var.set("")
         self.bind_device_id_var.set("")
+        self.user_listbox.delete(0, "end")
         self.bind_listbox.delete(0, "end")
         self._bindings = []
+
+        # V2.3.3+
+        self._set_mode(False)   # 清空后回到创建模式
+        self._update_action_states()
+
         self.set_status("已清空表单", ok=True)
 
     def _require_selected_user_id(self) -> Optional[int]:
@@ -1175,7 +1291,11 @@ class UserAdminWidget:
         self.email_var.set(u.get("email") or "")
         self.pw_var.set("")
 
+        # v2.3.3+
+        self._set_mode(True)  # 选中用户 => 编辑模式（禁用创建按钮）
+
         self.set_status(f"已选中用户：ID={u.get('id')}（可更新信息/管理绑定）", ok=True)
+        self._update_action_states()
         self.refresh_bindings()
 
     # ---------- 事件：创建用户 ----------
@@ -1189,6 +1309,11 @@ class UserAdminWidget:
 
         if not name or not phone or not pw:
             self.set_status("创建用户需要：name / phone / password", ok=False)
+            return
+
+        # v2.3.3+
+        if email and (not _is_valid_email(email)):
+            self.set_status("Email 格式不正确", ok=False)
             return
 
         self.set_status("创建中...", ok=None)
@@ -1224,6 +1349,12 @@ class UserAdminWidget:
         name = (self.name_var.get() or "").strip()
         email = (self.email_var.get() or "").strip()
         pw = (self.pw_var.get() or "").strip()
+
+        # v2.3.3+
+        # 允许 email 为空字符串（表示置空），但如果是非空就必须合法
+        if email != "" and (not _is_valid_email(email)):
+            self.set_status("Email 格式不正确", ok=False)
+            return
 
         # 更新允许：name/email/password（phone 不给改）
         logger.info(f"[USER_ADMIN][UI] update_user user_id={uid} name={name!r} email={email!r} pw={'***' if pw else None}")
@@ -1297,6 +1428,8 @@ class UserAdminWidget:
         for b in bindings:
             self.bind_listbox.insert("end", f"device_id={b['device_id']} | {b.get('device_name')} | created_at={b.get('created_at')}")
         self.set_status(f"绑定设备 {len(bindings)} 条", ok=True)
+        self.bind_listbox.selection_clear(0, "end")
+        self._update_action_states()
 
     # ---------- 绑定：新增 ----------
     def on_bind_device(self):
@@ -1643,10 +1776,8 @@ class DateRangeWidget:
         except ValueError:
             return False
 
-
 class ContentTypeWidget:
     """内容类型与图片选项组件"""
-
     def __init__(self, parent):
         self.parent = parent
 
@@ -1670,6 +1801,31 @@ class ContentTypeWidget:
         ttk.Checkbutton(options_frame1, text="打包为ZIP文件", variable=self.zip_var).pack(side=tk.LEFT)
 
         # 第二行选项
+
+        # ===== v2.3.4 设备-key选择
+        self.key_frame = ttk.LabelFrame(self.frame, text="设备-key选择", padding="2")
+        self.key_frame.pack(fill=tk.BOTH, expand=True, pady=(2, 0))
+
+        self.key_hint_var = tk.StringVar(value="默认全选（全红）。点击任意条目进入手动选择模式。")
+        ttk.Label(self.key_frame, textvariable=self.key_hint_var).pack(anchor=tk.W)
+
+        self.key_listbox = tk.Listbox(self.key_frame, height=8, selectmode=tk.SINGLE)
+        self.key_listbox.pack(fill=tk.BOTH, expand=True, pady=(6, 0))
+
+        # 内部数据
+        self._key_items: List[Tuple[int, str, str]] = []  # [(device_id, key, value)]
+        self._key_mode = "auto"  # "auto" or "manual"
+
+        self.key_listbox.bind("<ButtonRelease-1>", self._on_key_click)
+
+        # image 勾选优先级：未勾选时禁用
+        def _on_image_toggle(*_):
+            self._update_keybox_state()
+
+        self.image_var.trace_add("write", _on_image_toggle)
+        self._update_keybox_state()
+        # v2.3.4 设备-key选择 =====
+
         options_frame2 = ttk.Frame(self.frame)
         options_frame2.pack(fill=tk.X, pady=(0, 5))
 
@@ -1731,6 +1887,93 @@ class ContentTypeWidget:
         fmt_input = self.rename_format_var.get().strip()
         return enabled, (fmt_input or None)
 
+    # v2.3.4+
+    def _update_keybox_state(self):
+        enabled = bool(self.image_var.get())
+        state = ("normal" if enabled else "disabled")
+        try:
+            self.key_listbox.config(state=state)
+        except Exception:
+            pass
+        if not enabled:
+            self.key_hint_var.set("未勾选“图片数据(image)”时，本选择不生效。")
+        else:
+            self.key_hint_var.set("默认全选（全红）。点击任意条目进入手动选择模式。")
+
+    def set_device_key_items(self, items: List[Tuple[int, str, str]]):
+        """
+        items: [(device_id, key, value), ...]
+        显示 value，但内部仍保留 key
+        """
+        self._key_items = items or []
+        self._key_mode = "auto"
+
+        self.key_listbox.config(state="normal")
+        self.key_listbox.delete(0, "end")
+        for did, key, val in self._key_items:
+            self.key_listbox.insert("end", f"{did} - {val}")
+
+        # 默认全选：全红
+        for i in range(len(self._key_items)):
+            self.key_listbox.itemconfig(i, foreground="red")
+
+        self._update_keybox_state()
+
+    def _on_key_click(self, _evt=None):
+        if not self.image_var.get():
+            return
+        if not self._key_items:
+            return
+
+        sel = self.key_listbox.curselection()
+        if not sel:
+            return
+        idx = int(sel[0])
+
+        # 首次手动：全黑，再把当前点的变红
+        if self._key_mode == "auto":
+            self._key_mode = "manual"
+            for i in range(len(self._key_items)):
+                self.key_listbox.itemconfig(i, foreground="black")
+            self.key_listbox.itemconfig(idx, foreground="red")
+            return
+
+        # manual：toggle
+        cur = self.key_listbox.itemcget(idx, "foreground")
+        if cur == "red":
+            self.key_listbox.itemconfig(idx, foreground="black")
+        else:
+            self.key_listbox.itemconfig(idx, foreground="red")
+
+        # manual 边界：如果一个红的都没有 → 回到 auto（全红）
+        if self._key_mode == "manual":
+            any_red = any(self.key_listbox.itemcget(i, "foreground") == "red"
+                          for i in range(len(self._key_items)))
+            if not any_red:
+                self._key_mode = "auto"
+                for i in range(len(self._key_items)):
+                    self.key_listbox.itemconfig(i, foreground="red")
+
+    def get_selected_device_keys(self) -> Optional[Dict[int, List[str]]]:
+        """
+        返回：{device_id: [key1,key2,...]}
+        - image 未勾选：返回 None（不生效）
+        - auto 模式：返回 None（表示全选）
+        - manual 模式：返回只包含红色条目；如果为空则已自动回到 auto
+        """
+        if not self.image_var.get():
+            return None
+        if self._key_mode == "auto":
+            return None
+
+        selected: Dict[int, List[str]] = {}
+        for i, (did, key, _val) in enumerate(self._key_items):
+            if self.key_listbox.itemcget(i, "foreground") == "red":
+                selected.setdefault(did, []).append(key)
+
+        # 理论上不会为空（空会回到 auto），这里再兜底一次
+        return (selected or None)
+    # ======v2.3.4=======
 
 class DownloadDirWidget:
     """下载目录选择组件"""
@@ -1782,7 +2025,6 @@ class DownloadDirWidget:
             self.hint_label.config(foreground="red")
             return False
 
-
 class LogWidget:
     """日志显示组件"""
 
@@ -1822,7 +2064,6 @@ class LogWidget:
         self.log_text.config(state=tk.DISABLED)
         self.log_text.see(tk.END)
 
-
 class DownloadManagerApp:
     """主应用类"""
 
@@ -1840,7 +2081,7 @@ class DownloadManagerApp:
 
         # 创建主窗口
         self.root = tk.Tk()
-        self.root.title("设备数据下载器 - HOTUNS")
+        self.root.title("运维工具 - HOTUNS")
 
         # v2.2.5+
         self.root.protocol("WM_DELETE_WINDOW", self.on_close)
@@ -1853,6 +2094,10 @@ class DownloadManagerApp:
 
         # v2.2.5
         self.root.protocol("WM_DELETE_WINDOW", self.on_close)
+
+        #v2.3.4+
+        self._device_image_keys_cache: Dict[int, List[Tuple[str, str]]] = {}
+        self._device_keys_refresh_token = 0
 
         # 设置窗口图标（如果有的话）
         try:
@@ -1972,13 +2217,35 @@ class DownloadManagerApp:
         tab_device = ttk.Frame(notebook)
         tab_user = ttk.Frame(notebook)
 
+        # v2.3.3+
+        # --- Tab 1 内部：左右两栏（左：配置；右：状态/日志）---
+        tab_download_row = ttk.Frame(tab_download)
+        tab_download_row.pack(fill=tk.BOTH, expand=True)
+        download_left = ttk.Frame(tab_download_row)
+        download_left.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=(0, 10))
+        download_right = ttk.Frame(tab_download_row)
+        download_right.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True)
+
         notebook.add(tab_download, text="数据下载")
         notebook.add(tab_device, text="设备查询")
         notebook.add(tab_user, text="用户管理")
 
-        # --- Tab 1：设备数据下载配置（原 left_frame 的内容搬进来）---
-        config_container = ttk.Frame(tab_download)
+        # v2.3.3-
+        # # --- Tab 1：设备数据下载配置（原 left_frame 的内容搬进来）---
+        # config_container = ttk.Frame(tab_download)
+        # config_container.pack(fill=tk.BOTH, expand=True)
+
+        # v2.3.3+
+        config_container = ttk.Frame(download_left)
         config_container.pack(fill=tk.BOTH, expand=True)
+
+        # v2.3.3+
+        status_label = ttk.Label(download_right, text="状态和日志", font=("TkDefaultFont", 12, "bold"))
+        status_label.pack(anchor=tk.W, pady=(0, 10))
+        self.progress_widget = DownloadProgressWidget(download_right)
+        self.progress_widget.frame.pack(fill=tk.X, pady=(0, 10))
+        self.log_widget = LogWidget(download_right)
+        self.log_widget.frame.pack(fill=tk.BOTH, expand=True)
 
         # 原来左侧的标题可选保留/不保留，这里不再重复标题
         # config_label = ttk.Label(config_container, text="设备数据下载配置", font=("TkDefaultFont", 12, "bold"))
@@ -1989,7 +2256,12 @@ class DownloadManagerApp:
         self.dir_widget = DownloadDirWidget(config_container)
         self.dir_widget.frame.pack(fill=tk.X, pady=(0, 10))
 
-        self.device_widget = DeviceNameSelectionWidget(config_container)
+        # v2.3.4-
+        # self.device_widget = DeviceNameSelectionWidget(config_container)
+
+        #v2.3.4+
+        self.device_widget = DeviceNameSelectionWidget(config_container, on_change=self.on_devices_changed)
+
         self.device_widget.frame.pack(fill=tk.X, pady=(0, 10))
 
         self.date_widget = DateRangeWidget(config_container)
@@ -2027,25 +2299,26 @@ class DownloadManagerApp:
         )
         self.config_query_widget.frame.pack(fill=tk.BOTH, expand=True, pady=(0, 10))
 
-        # self.latest_data_query_widget = DeviceLatestDataQueryWidget(
-        #     query_container,
-        #     get_downloader=lambda: self.downloader
-        # )
-        # self.latest_data_query_widget.frame.pack(fill=tk.BOTH, expand=True)
+        self.latest_data_query_widget = DeviceLatestDataQueryWidget(
+            query_container,
+            get_downloader=lambda: self.downloader
+        )
+        self.latest_data_query_widget.frame.pack(fill=tk.BOTH, expand=True)
 
         # --- Tab 3：用户管理 ---
         self.user_admin_widget = UserAdminWidget(tab_user)
         self.user_admin_widget.frame.pack(fill=tk.BOTH, expand=True)
 
-        # ========== 右侧：状态和日志 ==========
-        status_label = ttk.Label(right_frame, text="状态和日志", font=("TkDefaultFont", 12, "bold"))
-        status_label.pack(anchor=tk.W, pady=(0, 10))
-
-        self.progress_widget = DownloadProgressWidget(right_frame)
-        self.progress_widget.frame.pack(fill=tk.X, pady=(0, 10))
-
-        self.log_widget = LogWidget(right_frame)
-        self.log_widget.frame.pack(fill=tk.BOTH, expand=True)
+        # v2.3.3-
+        # # ========== 右侧：状态和日志 ==========
+        # status_label = ttk.Label(right_frame, text="状态和日志", font=("TkDefaultFont", 12, "bold"))
+        # status_label.pack(anchor=tk.W, pady=(0, 10))
+        #
+        # self.progress_widget = DownloadProgressWidget(right_frame)
+        # self.progress_widget.frame.pack(fill=tk.X, pady=(0, 10))
+        #
+        # self.log_widget = LogWidget(right_frame)
+        # self.log_widget.frame.pack(fill=tk.BOTH, expand=True)
 
     # v2.3.2-
     # def setup_ui(self):
@@ -2360,6 +2633,9 @@ class DownloadManagerApp:
         export_raw_keys = self.content_widget.use_raw_keys()
         self.downloader.export_raw_keys = export_raw_keys
 
+        # v2.3.4+
+        selected_device_keys = self.content_widget.get_selected_device_keys()
+
         devices = self.device_widget.get_devices()
         start_time, end_time = self.date_widget.get_date_range()
         contents = self.content_widget.get_content_types()
@@ -2403,13 +2679,13 @@ class DownloadManagerApp:
         # 启动下载线程
         self.download_thread = threading.Thread(
             target=self.download_worker,
-            args=(devices, contents, start_time, end_time, is_zip, thumb, rename_enabled, rename_fmt),
+            args=(devices, contents, start_time, end_time, is_zip, thumb, rename_enabled, rename_fmt, selected_device_keys),
             daemon=True
         )
         self.download_thread.start()
 
     # v2.2.4+
-    def download_worker(self, devices, contents, start_time, end_time, is_zip, thumb, rename_enabled, rename_fmt):
+    def download_worker(self, devices, contents, start_time, end_time, is_zip, thumb, rename_enabled, rename_fmt, selected_device_keys):
         """下载工作线程"""
         loop = None
         try:
@@ -2429,7 +2705,8 @@ class DownloadManagerApp:
                     is_zip=is_zip,
                     thumbnail=thumb,
                     rename_images=rename_enabled,
-                    rename_format=rename_fmt
+                    rename_format=rename_fmt,
+                    selected_device_keys=selected_device_keys,  # v2.3.4 新增参数
                 )
             )
 
@@ -2552,10 +2829,74 @@ class DownloadManagerApp:
         self.download_btn.config(state=tk.NORMAL)
         self.progress_widget.enable_cancel_button(False)
 
+    # v2.3.4+
+    def on_devices_changed(self):
+        """
+        设备列表变化后：后台拉每个设备 config -> parse -> image_keys
+        然后刷新 ContentTypeWidget 的 key_listbox
+        """
+        devices = self.device_widget.get_devices()
+        self._device_keys_refresh_token += 1
+        token = self._device_keys_refresh_token
+
+        if not devices:
+            self._device_image_keys_cache.clear()
+            self.content_widget.set_device_key_items([])
+            return
+
+        downloader = self.downloader  # 用当前 downloader
+        root = self.root
+
+        def worker():
+            loop = None
+            try:
+                loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(loop)
+
+                items: List[Tuple[int, str]] = []
+
+                for did in devices:
+                    # 缓存命中就不查库
+                    if did in self._device_image_keys_cache:
+                        pairs = self._device_image_keys_cache[did]  # [(key,value),...]
+                    else:
+                        row = loop.run_until_complete(downloader._get_device_config_async(did))
+                        pairs = []
+                        if row:
+                            try:
+                                _config_data, config_image = downloader._parse_config(row)
+                                if config_image:
+                                    pairs = [(k, str(v)) for k, v in config_image.items()]
+                            except Exception:
+                                pairs = []
+                        self._device_image_keys_cache[did] = pairs
+
+                    for k, v in pairs:
+                        items.append((did, k, v))
+
+                # 如果期间设备又变了，就丢弃旧结果
+                def apply():
+                    if token != self._device_keys_refresh_token:
+                        return
+                    self.content_widget.set_device_key_items(items)
+
+                root.after(0, apply)
+
+            except Exception:
+                # 出错就清空，但不影响主下载功能
+                root.after(0, lambda: self.content_widget.set_device_key_items([]))
+            finally:
+                if loop is not None:
+                    try:
+                        loop.close()
+                    except Exception:
+                        pass
+
+        threading.Thread(target=worker, daemon=True).start()
+
     def run(self):
         """运行应用"""
         self.root.mainloop()
-
 
 if __name__ == "__main__":
     # v2.3.1+

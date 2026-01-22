@@ -131,6 +131,7 @@ class AsyncDeviceDataDownloader:
         thumbnail: bool = False,
         rename_images: bool = True,
         rename_format: Optional[str] = None,
+        selected_device_keys: Optional[Dict[int, List[str]]] = None,# v2.3.4+
     ) -> Dict[str, Any]:
         """
         异步下载设备数据
@@ -162,7 +163,22 @@ class AsyncDeviceDataDownloader:
             self._cancelled = False
             start_time = datetime.strptime(start_at, "%Y-%m-%d %H:%M:%S")
             end_time = datetime.strptime(end_at, "%Y-%m-%d %H:%M:%S")
-            
+
+            # v2.3.4-
+            # # v2.3.4：如果你希望“选择一次key -> 应用于所有设备”
+            # if selected_device_keys is not None and devices:
+            #     # 情况1：你传进来的是 list[str]（全局key列表）
+            #     if isinstance(selected_device_keys, list):
+            #         selected_device_keys = {did: list(selected_device_keys) for did in devices}
+            #
+            #     # 情况2：你传进来是 dict，但只给了部分设备 -> 将“第一份选择”广播到所有设备
+            #     elif isinstance(selected_device_keys, dict):
+            #         missing = [did for did in devices if did not in selected_device_keys]
+            #         if missing and len(selected_device_keys) >= 1:
+            #             first_keys = next(iter(selected_device_keys.values()))
+            #             for did in missing:
+            #                 selected_device_keys[did] = list(first_keys)
+
             if start_time >= end_time:
                 raise DownloadError("开始时间必须早于结束时间")
             
@@ -207,7 +223,8 @@ class AsyncDeviceDataDownloader:
                     await self._process_single_device(
                         device_id, contents, start_time, end_time,
                         data_table_start, data_table_end, work_dir,
-                        thumbnail, rename_images, rename_format
+                        thumbnail, rename_images, rename_format,
+                        selected_device_keys=selected_device_keys,# v2.3.4
                     )
                     results["processed_devices"] += 1
 
@@ -318,6 +335,7 @@ class AsyncDeviceDataDownloader:
         thumbnail: bool,
         rename_images: bool,
         rename_format: Optional[str],
+        selected_device_keys: Optional[Dict[int, List[str]]] = None,# v2.3.4+
     ):
         """处理单个设备的数据下载"""
         device_path = work_dir / str(device_id)
@@ -329,6 +347,13 @@ class AsyncDeviceDataDownloader:
             raise DownloadError(f"无法获取设备 {device_id} 的配置")
 
         config_data, config_image = self._parse_config(config)
+
+        # v2.3.4：按设备筛选
+        # 只要 selected_device_keys 不是 None，就进入“按设备选择”的模式：
+        # - dict 里没有该 device_id -> 空集合 -> 该设备不下载任何图片
+        allowed_keys = None
+        if selected_device_keys is not None:
+            allowed_keys = set(selected_device_keys.get(device_id, []))
 
         # 获取数据表信息
         table_infos = await self._get_table_infos_async(data_table_start, data_table_end)
@@ -342,11 +367,20 @@ class AsyncDeviceDataDownloader:
 
         # 处理图片
         if "image" in contents:
+            # 如果配置里本来就没有图片项，直接跳过
+            if not config_image:
+                return
+
+            # v2.3.4：如果用户对该设备有选择但选空了 -> 不下载任何图片
+            if allowed_keys is not None and len(allowed_keys) == 0:
+                return
+
             await self._download_device_images_async(
                 device_id, start_time, end_time, table_infos,
-                config_image, device_path, thumbnail, rename_images, rename_format
+                config_image, device_path, thumbnail, rename_images, rename_format,
+                allowed_keys=allowed_keys,  # v2.3.4+
             )
-    
+
     async def _get_device_config_async(self, device_id: int) -> Optional[Tuple]:
         """异步获取设备配置"""
         loop = asyncio.get_event_loop()
@@ -423,7 +457,7 @@ class AsyncDeviceDataDownloader:
     async def _download_device_images_async(
             self, device_id: int, start_time: datetime, end_time: datetime,
             table_infos: List[Tuple], config_image: Dict[str, str], device_path: Path,
-            thumbnail: bool, rename_images: bool, rename_format: Optional[str]
+            thumbnail: bool, rename_images: bool, rename_format: Optional[str], allowed_keys: Optional[set] = None,  # v2.3.4+
     ):
         """异步下载设备图片（队列 + 限并发 + 可选限速 + fatal 后立刻停止请求但继续清队列）"""
 
@@ -507,6 +541,7 @@ class AsyncDeviceDataDownloader:
                             thumbnail, rename_images, rename_format,
                             throttler=throttler,
                             max_retries=max_retries,
+                            allowed_keys=allowed_keys, # v2.3.4
                         )
                     except DownloadError as e:
                         # 第一次致命错误：记录原因 + 触发停止
@@ -590,7 +625,9 @@ class AsyncDeviceDataDownloader:
             thumbnail: bool, rename_images: bool, rename_format: Optional[str],
             throttler: Optional[_AsyncThrottle] = None,
             max_retries: int = 0,
+            allowed_keys: Optional[set] = None,
     ):
+
         """异步下载单张图片（受队列worker控制并发；内部可限速/重试）"""
 
         def _should_retry(e: Exception) -> bool:
@@ -622,14 +659,19 @@ class AsyncDeviceDataDownloader:
                 return
 
             for key, value in image_data.items():
-                if key in config_image:
-                    key_dir = device_path / config_image[key]
-                else:
-                    key_dir = device_path / key
+                # 未选 key 直接跳过（不会下载）
+                if allowed_keys is not None and key not in allowed_keys:
+                    continue
 
+                # 目录名用 value（配置名），没有就回退 key
+                folder_name = config_image.get(key) or key
+                folder_name = self._sanitize_filename(str(folder_name))  # 可选：避免非法字符
+                key_dir = device_path / folder_name
                 key_dir.mkdir(exist_ok=True)
 
                 image_path = value["value"]
+                ...
+
                 if image_path.startswith("/"):
                     image_path = image_path[1:]
                 current_object = image_path  # 记录当前对象，方便报错定位

@@ -3586,3 +3586,674 @@ RuntimeError: bcrypt 未安装：请先安装 bcrypt
 2026-01-20 15:32:14,530 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(509,)
 2026-01-20 15:32:14,594 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=0 cost_ms=159
 2026-01-20 15:32:14,594 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=0
+2026-01-20 16:12:20,682 - download.async_downloader - INFO - OSS连接成功
+2026-01-20 16:39:24,462 - download.async_downloader - INFO - OSS连接成功
+2026-01-20 16:39:44,977 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-01-20 16:39:44,977 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-01-20 16:39:44,983 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-01-20 16:40:02,410 - download.async_downloader - INFO - OSS连接成功
+2026-01-20 16:40:02,415 - download.async_downloader - INFO - 数据表时间范围: 2026-01-01 00:00:00 到 2026-01-31 23:59:59
+2026-01-20 16:40:02,424 - download.async_downloader - INFO - [10.0%] downloading: 1135 (1/1)
+2026-01-20 16:40:03,305 - download.async_downloader - INFO - [100.0%] Download completed
+2026-01-20 16:42:26,543 - download.async_downloader - INFO - OSS连接成功
+2026-01-20 16:42:32,040 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-01-20 16:42:32,041 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-01-20 16:42:32,042 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-01-20 16:42:52,120 - tui_app - INFO - [USER_ADMIN][UI] on_search keyword='测试01'
+2026-01-20 16:42:52,121 - download.db - INFO - [USER_ADMIN][DB_CALL] find_users_by_name_or_phone keyword='测试01'
+2026-01-20 16:42:52,122 - download.db - INFO - [USER_ADMIN][SQL] mode=name sql=SELECT id, name, phone, email, password, created_at, updated_at, avatar FROM users WHERE name = %s LIMIT 20 params=('测试01',)
+2026-01-20 16:42:52,292 - download.db - INFO - [USER_ADMIN][DB_RESULT] mode=name count=1 cost_ms=171
+2026-01-20 16:42:52,292 - tui_app - INFO - [USER_ADMIN][UI] search_result ok=True count=1
+2026-01-20 16:42:53,237 - tui_app - INFO - [USER_ADMIN][UI] pick_user user_id=508 name='测试01'
+2026-01-20 16:42:53,238 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=508
+2026-01-20 16:42:53,238 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=508
+2026-01-20 16:42:53,340 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(508,)
+2026-01-20 16:42:53,398 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=0 cost_ms=160
+2026-01-20 16:42:53,398 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=0
+2026-01-20 16:43:24,001 - tui_app - INFO - [USER_ADMIN][UI] update_user user_id=508 name='测试01' email='1137256548@163.com' pw=None
+2026-01-20 16:43:24,002 - download.db - INFO - [USER_ADMIN][DB_CALL] update_user_info user_id=508 name='测试01' email='1137256548@163.com' pw=None
+2026-01-20 16:43:24,003 - download.db - INFO - [USER_ADMIN][SQL] update_user sql=UPDATE users SET name = %s, email = %s, updated_at = CURRENT_TIMESTAMP WHERE id = %s LIMIT 1 params=('测试01', '1137256548@163.com', 508)
+2026-01-20 16:43:24,170 - download.db - INFO - [USER_ADMIN][DB_RESULT] update_user rows=1 cost_ms=168
+2026-01-20 16:43:24,170 - tui_app - INFO - [USER_ADMIN][UI] update_user_result ok=True updated_rows=1
+2026-01-20 16:43:38,911 - tui_app - INFO - [USER_ADMIN][UI] clear_form
+2026-01-20 16:43:43,963 - tui_app - INFO - [USER_ADMIN][UI] on_search keyword='测试'
+2026-01-20 16:43:43,963 - download.db - INFO - [USER_ADMIN][DB_CALL] find_users_by_name_or_phone keyword='测试'
+2026-01-20 16:43:43,963 - download.db - INFO - [USER_ADMIN][SQL] mode=name sql=SELECT id, name, phone, email, password, created_at, updated_at, avatar FROM users WHERE name = %s LIMIT 20 params=('测试',)
+2026-01-20 16:43:44,174 - download.db - INFO - [USER_ADMIN][DB_RESULT] mode=name count=0 cost_ms=211
+2026-01-20 16:43:44,175 - tui_app - INFO - [USER_ADMIN][UI] search_result ok=True count=0
+2026-01-20 16:50:59,333 - tui_app - INFO - [USER_ADMIN][UI] on_search keyword='测试'
+2026-01-20 16:50:59,335 - download.db - INFO - [USER_ADMIN][DB_CALL] find_users_by_name_or_phone keyword='测试'
+2026-01-20 16:50:59,335 - download.db - INFO - [USER_ADMIN][SQL] mode=name sql=SELECT id, name, phone, email, password, created_at, updated_at, avatar FROM users WHERE name = %s LIMIT 20 params=('测试',)
+2026-01-20 16:50:59,966 - download.db - INFO - [USER_ADMIN][DB_RESULT] mode=name count=0 cost_ms=631
+2026-01-20 16:50:59,966 - tui_app - INFO - [USER_ADMIN][UI] search_result ok=True count=0
+2026-01-20 16:51:35,646 - tui_app - INFO - [USER_ADMIN][UI] on_search keyword='测试'
+2026-01-20 16:51:35,649 - download.db - INFO - [USER_ADMIN][DB_CALL] find_users_by_name_or_phone keyword='测试'
+2026-01-20 16:51:35,649 - download.db - INFO - [USER_ADMIN][SQL] mode=name sql=SELECT id, name, phone, email, password, created_at, updated_at, avatar FROM users WHERE name = %s LIMIT 20 params=('测试',)
+2026-01-20 16:51:35,839 - download.db - INFO - [USER_ADMIN][DB_RESULT] mode=name count=0 cost_ms=191
+2026-01-20 16:51:35,840 - tui_app - INFO - [USER_ADMIN][UI] search_result ok=True count=0
+2026-01-20 16:51:38,596 - tui_app - INFO - [USER_ADMIN][UI] on_search keyword='测试01'
+2026-01-20 16:51:38,598 - download.db - INFO - [USER_ADMIN][DB_CALL] find_users_by_name_or_phone keyword='测试01'
+2026-01-20 16:51:38,598 - download.db - INFO - [USER_ADMIN][SQL] mode=name sql=SELECT id, name, phone, email, password, created_at, updated_at, avatar FROM users WHERE name = %s LIMIT 20 params=('测试01',)
+2026-01-20 16:51:38,868 - download.db - INFO - [USER_ADMIN][DB_RESULT] mode=name count=1 cost_ms=270
+2026-01-20 16:51:38,868 - tui_app - INFO - [USER_ADMIN][UI] search_result ok=True count=1
+2026-01-20 16:51:43,106 - tui_app - INFO - [USER_ADMIN][UI] pick_user user_id=508 name='测试01'
+2026-01-20 16:51:43,107 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=508
+2026-01-20 16:51:43,108 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=508
+2026-01-20 16:51:44,453 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(508,)
+2026-01-20 16:51:44,722 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=0 cost_ms=1614
+2026-01-20 16:51:44,723 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=0
+2026-01-20 16:51:49,491 - tui_app - INFO - [USER_ADMIN][UI] update_user user_id=508 name='测试01' email='1137256548@163.com' pw=None
+2026-01-20 16:51:49,492 - download.db - INFO - [USER_ADMIN][DB_CALL] update_user_info user_id=508 name='测试01' email='1137256548@163.com' pw=None
+2026-01-20 16:51:49,493 - download.db - INFO - [USER_ADMIN][SQL] update_user sql=UPDATE users SET name = %s, email = %s, updated_at = CURRENT_TIMESTAMP WHERE id = %s LIMIT 1 params=('测试01', '1137256548@163.com', 508)
+2026-01-20 16:51:50,181 - download.db - INFO - [USER_ADMIN][DB_RESULT] update_user rows=1 cost_ms=689
+2026-01-20 16:51:50,181 - tui_app - INFO - [USER_ADMIN][UI] update_user_result ok=True updated_rows=1
+2026-01-20 16:52:04,236 - tui_app - INFO - [USER_ADMIN][UI] update_user user_id=508 name='测试01' email='1137256548@163.com' pw=None
+2026-01-20 16:52:04,238 - download.db - INFO - [USER_ADMIN][DB_CALL] update_user_info user_id=508 name='测试01' email='1137256548@163.com' pw=None
+2026-01-20 16:52:04,239 - download.db - INFO - [USER_ADMIN][SQL] update_user sql=UPDATE users SET name = %s, email = %s, updated_at = CURRENT_TIMESTAMP WHERE id = %s LIMIT 1 params=('测试01', '1137256548@163.com', 508)
+2026-01-20 16:52:05,114 - download.db - INFO - [USER_ADMIN][DB_RESULT] update_user rows=1 cost_ms=876
+2026-01-20 16:52:05,114 - tui_app - INFO - [USER_ADMIN][UI] update_user_result ok=True updated_rows=1
+2026-01-20 16:56:59,339 - download.async_downloader - INFO - OSS连接成功
+2026-01-20 16:57:09,865 - tui_app - INFO - [USER_ADMIN][UI] on_search keyword='测试01'
+2026-01-20 16:57:09,865 - download.db - INFO - [USER_ADMIN][DB_CALL] find_users_by_name_or_phone keyword='测试01'
+2026-01-20 16:57:09,865 - download.db - INFO - [USER_ADMIN][SQL] mode=name sql=SELECT id, name, phone, email, password, created_at, updated_at, avatar FROM users WHERE name = %s LIMIT 20 params=('测试01',)
+2026-01-20 16:57:09,981 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-01-20 16:57:09,982 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-01-20 16:57:09,982 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-01-20 16:57:10,114 - download.db - INFO - [USER_ADMIN][DB_RESULT] mode=name count=1 cost_ms=249
+2026-01-20 16:57:10,115 - tui_app - INFO - [USER_ADMIN][UI] search_result ok=True count=1
+2026-01-20 16:57:29,726 - tui_app - INFO - [USER_ADMIN][UI] pick_user user_id=508 name='测试01'
+2026-01-20 16:57:29,727 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=508
+2026-01-20 16:57:29,728 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=508
+2026-01-20 16:57:29,887 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(508,)
+2026-01-20 16:57:29,957 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=0 cost_ms=229
+2026-01-20 16:57:29,957 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=0
+2026-01-20 16:57:32,846 - tui_app - INFO - [USER_ADMIN][UI] pick_user user_id=508 name='测试01'
+2026-01-20 16:57:32,846 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=508
+2026-01-20 16:57:32,846 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=508
+2026-01-20 16:57:32,981 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(508,)
+2026-01-20 16:57:33,044 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=0 cost_ms=198
+2026-01-20 16:57:33,044 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=0
+2026-01-20 16:59:39,945 - download.async_downloader - INFO - OSS连接成功
+2026-01-20 17:01:04,162 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 09:45:11,548 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 09:45:19,900 - tui_app - INFO - [USER_ADMIN][UI] on_search keyword='123'
+2026-01-22 09:45:19,901 - download.db - INFO - [USER_ADMIN][DB_CALL] find_users_by_name_or_phone keyword='123'
+2026-01-22 09:45:19,901 - download.db - INFO - [USER_ADMIN][SQL] mode=name sql=SELECT id, name, phone, email, password, created_at, updated_at, avatar FROM users WHERE name = %s LIMIT 20 params=('123',)
+2026-01-22 09:45:20,018 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-01-22 09:45:20,019 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-01-22 09:45:20,025 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-01-22 09:45:20,121 - download.db - INFO - [USER_ADMIN][DB_RESULT] mode=name count=1 cost_ms=220
+2026-01-22 09:45:20,121 - tui_app - INFO - [USER_ADMIN][UI] search_result ok=True count=1
+2026-01-22 09:45:21,596 - tui_app - INFO - [USER_ADMIN][UI] pick_user user_id=236 name='123'
+2026-01-22 09:45:21,597 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=236
+2026-01-22 09:45:21,598 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=236
+2026-01-22 09:45:21,666 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(236,)
+2026-01-22 09:45:21,715 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=0 cost_ms=117
+2026-01-22 09:45:21,715 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=0
+2026-01-22 09:48:14,246 - tui_app - INFO - [USER_ADMIN][UI] clear_form
+2026-01-22 09:48:18,411 - tui_app - INFO - [USER_ADMIN][UI] on_search keyword='240'
+2026-01-22 09:48:18,413 - download.db - INFO - [USER_ADMIN][DB_CALL] find_users_by_name_or_phone keyword='240'
+2026-01-22 09:48:18,413 - download.db - INFO - [USER_ADMIN][SQL] mode=name sql=SELECT id, name, phone, email, password, created_at, updated_at, avatar FROM users WHERE name = %s LIMIT 20 params=('240',)
+2026-01-22 09:48:18,592 - download.db - INFO - [USER_ADMIN][DB_RESULT] mode=name count=0 cost_ms=179
+2026-01-22 09:48:18,592 - tui_app - INFO - [USER_ADMIN][UI] search_result ok=True count=0
+2026-01-22 09:48:26,081 - tui_app - INFO - [USER_ADMIN][UI] on_search keyword='240'
+2026-01-22 09:48:26,087 - download.db - INFO - [USER_ADMIN][DB_CALL] find_users_by_name_or_phone keyword='240'
+2026-01-22 09:48:26,087 - download.db - INFO - [USER_ADMIN][SQL] mode=name sql=SELECT id, name, phone, email, password, created_at, updated_at, avatar FROM users WHERE name = %s LIMIT 20 params=('240',)
+2026-01-22 09:48:26,221 - download.db - INFO - [USER_ADMIN][DB_RESULT] mode=name count=0 cost_ms=134
+2026-01-22 09:48:26,221 - tui_app - INFO - [USER_ADMIN][UI] search_result ok=True count=0
+2026-01-22 09:48:49,233 - tui_app - INFO - [USER_ADMIN][UI] on_search keyword='18245077926'
+2026-01-22 09:48:49,234 - download.db - INFO - [USER_ADMIN][DB_CALL] find_users_by_name_or_phone keyword='18245077926'
+2026-01-22 09:48:49,234 - download.db - INFO - [USER_ADMIN][SQL] mode=phone sql=SELECT id, name, phone, email, password, created_at, updated_at, avatar FROM users WHERE phone = %s LIMIT 5 params=('18245077926',)
+2026-01-22 09:48:49,365 - download.db - INFO - [USER_ADMIN][DB_RESULT] mode=phone count=1 cost_ms=131
+2026-01-22 09:48:49,365 - tui_app - INFO - [USER_ADMIN][UI] search_result ok=True count=1
+2026-01-22 09:48:50,823 - tui_app - INFO - [USER_ADMIN][UI] pick_user user_id=240 name='18245077926'
+2026-01-22 09:48:50,824 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=240
+2026-01-22 09:48:50,825 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=240
+2026-01-22 09:48:50,920 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(240,)
+2026-01-22 09:48:50,972 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=1 cost_ms=147
+2026-01-22 09:48:50,972 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=1
+2026-01-22 09:48:59,273 - tui_app - INFO - [USER_ADMIN][UI] on_search keyword='111'
+2026-01-22 09:48:59,274 - download.db - INFO - [USER_ADMIN][DB_CALL] find_users_by_name_or_phone keyword='111'
+2026-01-22 09:48:59,274 - download.db - INFO - [USER_ADMIN][SQL] mode=name sql=SELECT id, name, phone, email, password, created_at, updated_at, avatar FROM users WHERE name = %s LIMIT 20 params=('111',)
+2026-01-22 09:48:59,391 - download.db - INFO - [USER_ADMIN][DB_RESULT] mode=name count=0 cost_ms=117
+2026-01-22 09:48:59,391 - tui_app - INFO - [USER_ADMIN][UI] search_result ok=True count=0
+2026-01-22 09:51:57,911 - tui_app - INFO - [USER_ADMIN][UI] on_search keyword='111'
+2026-01-22 09:51:57,914 - download.db - INFO - [USER_ADMIN][DB_CALL] find_users_by_name_or_phone keyword='111'
+2026-01-22 09:51:57,914 - download.db - INFO - [USER_ADMIN][SQL] mode=name sql=SELECT id, name, phone, email, password, created_at, updated_at, avatar FROM users WHERE name = %s LIMIT 20 params=('111',)
+2026-01-22 09:51:58,065 - download.db - INFO - [USER_ADMIN][DB_RESULT] mode=name count=0 cost_ms=151
+2026-01-22 09:51:58,066 - tui_app - INFO - [USER_ADMIN][UI] search_result ok=True count=0
+2026-01-22 09:51:58,683 - tui_app - INFO - [USER_ADMIN][UI] on_search keyword='111'
+2026-01-22 09:51:58,684 - download.db - INFO - [USER_ADMIN][DB_CALL] find_users_by_name_or_phone keyword='111'
+2026-01-22 09:51:58,685 - download.db - INFO - [USER_ADMIN][SQL] mode=name sql=SELECT id, name, phone, email, password, created_at, updated_at, avatar FROM users WHERE name = %s LIMIT 20 params=('111',)
+2026-01-22 09:51:58,825 - download.db - INFO - [USER_ADMIN][DB_RESULT] mode=name count=0 cost_ms=141
+2026-01-22 09:51:58,826 - tui_app - INFO - [USER_ADMIN][UI] search_result ok=True count=0
+2026-01-22 09:51:59,199 - tui_app - INFO - [USER_ADMIN][UI] on_search keyword='111'
+2026-01-22 09:51:59,204 - download.db - INFO - [USER_ADMIN][DB_CALL] find_users_by_name_or_phone keyword='111'
+2026-01-22 09:51:59,204 - download.db - INFO - [USER_ADMIN][SQL] mode=name sql=SELECT id, name, phone, email, password, created_at, updated_at, avatar FROM users WHERE name = %s LIMIT 20 params=('111',)
+2026-01-22 09:51:59,333 - download.db - INFO - [USER_ADMIN][DB_RESULT] mode=name count=0 cost_ms=129
+2026-01-22 09:51:59,334 - tui_app - INFO - [USER_ADMIN][UI] search_result ok=True count=0
+2026-01-22 09:52:00,690 - tui_app - INFO - [USER_ADMIN][UI] clear_form
+2026-01-22 09:52:02,105 - tui_app - INFO - [USER_ADMIN][UI] on_search keyword='111'
+2026-01-22 09:52:02,106 - download.db - INFO - [USER_ADMIN][DB_CALL] find_users_by_name_or_phone keyword='111'
+2026-01-22 09:52:02,106 - download.db - INFO - [USER_ADMIN][SQL] mode=name sql=SELECT id, name, phone, email, password, created_at, updated_at, avatar FROM users WHERE name = %s LIMIT 20 params=('111',)
+2026-01-22 09:52:02,234 - download.db - INFO - [USER_ADMIN][DB_RESULT] mode=name count=0 cost_ms=127
+2026-01-22 09:52:02,234 - tui_app - INFO - [USER_ADMIN][UI] search_result ok=True count=0
+2026-01-22 09:54:15,563 - tui_app - INFO - [USER_ADMIN][UI] on_search keyword='123'
+2026-01-22 09:54:15,566 - download.db - INFO - [USER_ADMIN][DB_CALL] find_users_by_name_or_phone keyword='123'
+2026-01-22 09:54:15,566 - download.db - INFO - [USER_ADMIN][SQL] mode=name sql=SELECT id, name, phone, email, password, created_at, updated_at, avatar FROM users WHERE name = %s LIMIT 20 params=('123',)
+2026-01-22 09:54:15,719 - download.db - INFO - [USER_ADMIN][DB_RESULT] mode=name count=1 cost_ms=153
+2026-01-22 09:54:15,719 - tui_app - INFO - [USER_ADMIN][UI] search_result ok=True count=1
+2026-01-22 09:54:17,274 - tui_app - INFO - [USER_ADMIN][UI] pick_user user_id=236 name='123'
+2026-01-22 09:54:17,275 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=236
+2026-01-22 09:54:17,275 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=236
+2026-01-22 09:54:17,349 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(236,)
+2026-01-22 09:54:17,400 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=0 cost_ms=125
+2026-01-22 09:54:17,400 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=0
+2026-01-22 09:54:20,238 - tui_app - INFO - [USER_ADMIN][UI] clear_form
+2026-01-22 09:54:24,666 - tui_app - INFO - [USER_ADMIN][UI] on_search keyword='123'
+2026-01-22 09:54:24,667 - download.db - INFO - [USER_ADMIN][DB_CALL] find_users_by_name_or_phone keyword='123'
+2026-01-22 09:54:24,668 - download.db - INFO - [USER_ADMIN][SQL] mode=name sql=SELECT id, name, phone, email, password, created_at, updated_at, avatar FROM users WHERE name = %s LIMIT 20 params=('123',)
+2026-01-22 09:54:24,800 - download.db - INFO - [USER_ADMIN][DB_RESULT] mode=name count=1 cost_ms=133
+2026-01-22 09:54:24,800 - tui_app - INFO - [USER_ADMIN][UI] search_result ok=True count=1
+2026-01-22 09:54:25,377 - tui_app - INFO - [USER_ADMIN][UI] pick_user user_id=236 name='123'
+2026-01-22 09:54:25,378 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=236
+2026-01-22 09:54:25,379 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=236
+2026-01-22 09:54:25,448 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(236,)
+2026-01-22 09:54:25,497 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=0 cost_ms=118
+2026-01-22 09:54:25,498 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=0
+2026-01-22 09:54:36,594 - tui_app - INFO - [USER_ADMIN][UI] create_user name='123' phone='15036335440' email=''
+2026-01-22 09:54:57,541 - tui_app - INFO - [USER_ADMIN][UI] on_search keyword='测试'
+2026-01-22 09:54:57,542 - download.db - INFO - [USER_ADMIN][DB_CALL] find_users_by_name_or_phone keyword='测试'
+2026-01-22 09:54:57,543 - download.db - INFO - [USER_ADMIN][SQL] mode=name sql=SELECT id, name, phone, email, password, created_at, updated_at, avatar FROM users WHERE name = %s LIMIT 20 params=('测试',)
+2026-01-22 09:54:57,716 - download.db - INFO - [USER_ADMIN][DB_RESULT] mode=name count=0 cost_ms=174
+2026-01-22 09:54:57,717 - tui_app - INFO - [USER_ADMIN][UI] search_result ok=True count=0
+2026-01-22 09:55:03,780 - tui_app - INFO - [USER_ADMIN][UI] on_search keyword='测试01'
+2026-01-22 09:55:03,781 - download.db - INFO - [USER_ADMIN][DB_CALL] find_users_by_name_or_phone keyword='测试01'
+2026-01-22 09:55:03,781 - download.db - INFO - [USER_ADMIN][SQL] mode=name sql=SELECT id, name, phone, email, password, created_at, updated_at, avatar FROM users WHERE name = %s LIMIT 20 params=('测试01',)
+2026-01-22 09:55:03,926 - download.db - INFO - [USER_ADMIN][DB_RESULT] mode=name count=1 cost_ms=145
+2026-01-22 09:55:03,926 - tui_app - INFO - [USER_ADMIN][UI] search_result ok=True count=1
+2026-01-22 09:55:04,476 - tui_app - INFO - [USER_ADMIN][UI] pick_user user_id=508 name='测试01'
+2026-01-22 09:55:04,476 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=508
+2026-01-22 09:55:04,477 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=508
+2026-01-22 09:55:04,550 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(508,)
+2026-01-22 09:55:04,598 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=0 cost_ms=121
+2026-01-22 09:55:04,598 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=0
+2026-01-22 09:55:09,226 - tui_app - INFO - [USER_ADMIN][UI] create_user name='测试01' phone='测试' email='1137256548@163.com'
+2026-01-22 09:55:14,656 - tui_app - INFO - [USER_ADMIN][UI] create_user name='测试01' phone='测试' email='1137256548@163.com'
+2026-01-22 09:55:14,656 - download.db - INFO - [USER_ADMIN][DB_CALL] create_user name='测试01' phone='测试' email='1137256548@163.com'
+2026-01-22 09:55:14,656 - download.db - WARNING - [USER_ADMIN][VALIDATE] invalid phone format
+2026-01-22 09:55:14,656 - tui_app - INFO - [USER_ADMIN][UI] create_user_result ok=False user_id=None
+2026-01-22 09:56:25,948 - tui_app - INFO - [USER_ADMIN][UI] on_search keyword='测试02'
+2026-01-22 09:56:25,950 - download.db - INFO - [USER_ADMIN][DB_CALL] find_users_by_name_or_phone keyword='测试02'
+2026-01-22 09:56:25,950 - download.db - INFO - [USER_ADMIN][SQL] mode=name sql=SELECT id, name, phone, email, password, created_at, updated_at, avatar FROM users WHERE name = %s LIMIT 20 params=('测试02',)
+2026-01-22 09:56:26,110 - download.db - INFO - [USER_ADMIN][DB_RESULT] mode=name count=1 cost_ms=160
+2026-01-22 09:56:26,111 - tui_app - INFO - [USER_ADMIN][UI] search_result ok=True count=1
+2026-01-22 09:56:26,690 - tui_app - INFO - [USER_ADMIN][UI] pick_user user_id=509 name='测试02'
+2026-01-22 09:56:26,692 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=509
+2026-01-22 09:56:26,693 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=509
+2026-01-22 09:56:26,773 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(509,)
+2026-01-22 09:56:26,827 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=0 cost_ms=134
+2026-01-22 09:56:26,827 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=0
+2026-01-22 09:56:31,226 - tui_app - INFO - [USER_ADMIN][UI] create_user name='测试02' phone='999999999' email='测试02'
+2026-01-22 09:56:59,600 - tui_app - INFO - [USER_ADMIN][UI] create_user name='测试02' phone='999999999' email='111111111@163.com'
+2026-01-22 09:56:59,602 - download.db - INFO - [USER_ADMIN][DB_CALL] create_user name='测试02' phone='999999999' email='111111111@163.com'
+2026-01-22 09:56:59,699 - download.db - INFO - [USER_ADMIN][SQL] check_phone sql=SELECT id FROM users WHERE phone = %s LIMIT 1 params=('999999999',)
+2026-01-22 09:56:59,749 - download.db - WARNING - [USER_ADMIN][BUSINESS] phone duplicate phone='999999999' user_id=509
+2026-01-22 09:56:59,750 - tui_app - INFO - [USER_ADMIN][UI] create_user_result ok=False user_id=None
+2026-01-22 09:58:59,296 - tui_app - INFO - [USER_ADMIN][UI] create_user name='测试02' phone='999999999' email='111111111@163.com'
+2026-01-22 09:58:59,300 - download.db - INFO - [USER_ADMIN][DB_CALL] create_user name='测试02' phone='999999999' email='111111111@163.com'
+2026-01-22 09:58:59,403 - download.db - INFO - [USER_ADMIN][SQL] check_phone sql=SELECT id FROM users WHERE phone = %s LIMIT 1 params=('999999999',)
+2026-01-22 09:58:59,459 - download.db - WARNING - [USER_ADMIN][BUSINESS] phone duplicate phone='999999999' user_id=509
+2026-01-22 09:58:59,459 - tui_app - INFO - [USER_ADMIN][UI] create_user_result ok=False user_id=None
+2026-01-22 10:00:01,213 - tui_app - INFO - [USER_ADMIN][UI] pick_user user_id=509 name='测试02'
+2026-01-22 10:00:01,214 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=509
+2026-01-22 10:00:01,215 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=509
+2026-01-22 10:00:01,322 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(509,)
+2026-01-22 10:00:01,374 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=0 cost_ms=159
+2026-01-22 10:00:01,374 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=0
+2026-01-22 10:00:24,386 - tui_app - INFO - [USER_ADMIN][UI] clear_form
+2026-01-22 10:07:22,135 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 10:07:30,275 - tui_app - INFO - [USER_ADMIN][UI] on_search keyword='123'
+2026-01-22 10:07:30,285 - download.db - INFO - [USER_ADMIN][DB_CALL] find_users_by_name_or_phone keyword='123'
+2026-01-22 10:07:30,285 - download.db - INFO - [USER_ADMIN][SQL] mode=name sql=SELECT id, name, phone, email, password, created_at, updated_at, avatar FROM users WHERE name = %s LIMIT 20 params=('123',)
+2026-01-22 10:07:30,386 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-01-22 10:07:30,386 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-01-22 10:07:30,387 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-01-22 10:07:30,491 - download.db - INFO - [USER_ADMIN][DB_RESULT] mode=name count=1 cost_ms=206
+2026-01-22 10:07:30,491 - tui_app - INFO - [USER_ADMIN][UI] search_result ok=True count=1
+2026-01-22 10:07:30,995 - tui_app - INFO - [USER_ADMIN][UI] pick_user user_id=236 name='123'
+2026-01-22 10:07:30,995 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=236
+2026-01-22 10:07:30,995 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=236
+2026-01-22 10:07:31,075 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(236,)
+2026-01-22 10:07:31,121 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=0 cost_ms=126
+2026-01-22 10:07:31,121 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=0
+2026-01-22 10:07:34,378 - tui_app - INFO - [USER_ADMIN][UI] clear_form
+2026-01-22 10:07:53,735 - tui_app - INFO - [USER_ADMIN][UI] pick_user user_id=236 name='123'
+2026-01-22 10:07:53,736 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=236
+2026-01-22 10:07:53,736 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=236
+2026-01-22 10:07:53,833 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(236,)
+2026-01-22 10:07:53,891 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=0 cost_ms=155
+2026-01-22 10:07:53,892 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=0
+2026-01-22 10:07:59,689 - tui_app - INFO - [USER_ADMIN][UI] clear_form
+2026-01-22 10:08:05,063 - tui_app - INFO - [USER_ADMIN][UI] on_search keyword='saber'
+2026-01-22 10:08:05,064 - download.db - INFO - [USER_ADMIN][DB_CALL] find_users_by_name_or_phone keyword='saber'
+2026-01-22 10:08:05,064 - download.db - INFO - [USER_ADMIN][SQL] mode=name sql=SELECT id, name, phone, email, password, created_at, updated_at, avatar FROM users WHERE name = %s LIMIT 20 params=('saber',)
+2026-01-22 10:08:05,192 - download.db - INFO - [USER_ADMIN][DB_RESULT] mode=name count=1 cost_ms=128
+2026-01-22 10:08:05,192 - tui_app - INFO - [USER_ADMIN][UI] search_result ok=True count=1
+2026-01-22 10:08:05,935 - tui_app - INFO - [USER_ADMIN][UI] pick_user user_id=2 name='saber'
+2026-01-22 10:08:05,936 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=2
+2026-01-22 10:08:05,937 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=2
+2026-01-22 10:08:06,007 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(2,)
+2026-01-22 10:08:06,058 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=3 cost_ms=121
+2026-01-22 10:08:06,059 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=3
+2026-01-22 10:08:09,071 - tui_app - INFO - [USER_ADMIN][UI] clear_form
+2026-01-22 10:11:47,264 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 10:11:57,499 - tui_app - INFO - [USER_ADMIN][UI] on_search keyword='saber'
+2026-01-22 10:11:57,499 - download.db - INFO - [USER_ADMIN][DB_CALL] find_users_by_name_or_phone keyword='saber'
+2026-01-22 10:11:57,499 - download.db - INFO - [USER_ADMIN][SQL] mode=name sql=SELECT id, name, phone, email, password, created_at, updated_at, avatar FROM users WHERE name = %s LIMIT 20 params=('saber',)
+2026-01-22 10:11:57,601 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-01-22 10:11:57,601 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-01-22 10:11:57,602 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-01-22 10:11:57,694 - download.db - INFO - [USER_ADMIN][DB_RESULT] mode=name count=1 cost_ms=195
+2026-01-22 10:11:57,694 - tui_app - INFO - [USER_ADMIN][UI] search_result ok=True count=1
+2026-01-22 10:11:59,509 - tui_app - INFO - [USER_ADMIN][UI] pick_user user_id=2 name='saber'
+2026-01-22 10:11:59,510 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=2
+2026-01-22 10:11:59,511 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=2
+2026-01-22 10:11:59,596 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(2,)
+2026-01-22 10:11:59,651 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=3 cost_ms=140
+2026-01-22 10:11:59,651 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=3
+2026-01-22 10:12:00,911 - tui_app - INFO - [USER_ADMIN][UI] clear_form
+2026-01-22 10:12:38,983 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 10:12:45,191 - tui_app - INFO - [USER_ADMIN][UI] on_search keyword='测试01'
+2026-01-22 10:12:45,192 - download.db - INFO - [USER_ADMIN][DB_CALL] find_users_by_name_or_phone keyword='测试01'
+2026-01-22 10:12:45,192 - download.db - INFO - [USER_ADMIN][SQL] mode=name sql=SELECT id, name, phone, email, password, created_at, updated_at, avatar FROM users WHERE name = %s LIMIT 20 params=('测试01',)
+2026-01-22 10:12:45,277 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-01-22 10:12:45,278 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-01-22 10:12:45,279 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-01-22 10:12:45,373 - download.db - INFO - [USER_ADMIN][DB_RESULT] mode=name count=1 cost_ms=181
+2026-01-22 10:12:45,374 - tui_app - INFO - [USER_ADMIN][UI] search_result ok=True count=1
+2026-01-22 10:12:46,106 - tui_app - INFO - [USER_ADMIN][UI] pick_user user_id=508 name='测试01'
+2026-01-22 10:12:46,107 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=508
+2026-01-22 10:12:46,108 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=508
+2026-01-22 10:12:46,191 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(508,)
+2026-01-22 10:12:46,241 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=0 cost_ms=133
+2026-01-22 10:12:46,241 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=0
+2026-01-22 10:12:48,161 - tui_app - INFO - [USER_ADMIN][UI] clear_form
+2026-01-22 10:13:07,215 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 10:17:17,240 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 10:17:24,816 - tui_app - INFO - [USER_ADMIN][UI] on_search keyword='测试02'
+2026-01-22 10:17:24,817 - download.db - INFO - [USER_ADMIN][DB_CALL] find_users_by_name_or_phone keyword='测试02'
+2026-01-22 10:17:24,817 - download.db - INFO - [USER_ADMIN][SQL] mode=name sql=SELECT id, name, phone, email, password, created_at, updated_at, avatar FROM users WHERE name = %s LIMIT 20 params=('测试02',)
+2026-01-22 10:17:24,916 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-01-22 10:17:24,917 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-01-22 10:17:24,918 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-01-22 10:17:25,013 - download.db - INFO - [USER_ADMIN][DB_RESULT] mode=name count=1 cost_ms=196
+2026-01-22 10:17:25,014 - tui_app - INFO - [USER_ADMIN][UI] search_result ok=True count=1
+2026-01-22 10:17:25,652 - tui_app - INFO - [USER_ADMIN][UI] pick_user user_id=509 name='测试02'
+2026-01-22 10:17:25,653 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=509
+2026-01-22 10:17:25,654 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=509
+2026-01-22 10:17:25,734 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(509,)
+2026-01-22 10:17:25,791 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=0 cost_ms=137
+2026-01-22 10:17:25,791 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=0
+2026-01-22 10:17:27,360 - tui_app - INFO - [USER_ADMIN][UI] clear_form
+2026-01-22 10:17:44,073 - tui_app - INFO - [USER_ADMIN][UI] on_search keyword='测试02'
+2026-01-22 10:17:44,074 - download.db - INFO - [USER_ADMIN][DB_CALL] find_users_by_name_or_phone keyword='测试02'
+2026-01-22 10:17:44,076 - download.db - INFO - [USER_ADMIN][SQL] mode=name sql=SELECT id, name, phone, email, password, created_at, updated_at, avatar FROM users WHERE name = %s LIMIT 20 params=('测试02',)
+2026-01-22 10:17:44,215 - download.db - INFO - [USER_ADMIN][DB_RESULT] mode=name count=1 cost_ms=141
+2026-01-22 10:17:44,216 - tui_app - INFO - [USER_ADMIN][UI] search_result ok=True count=1
+2026-01-22 10:17:45,425 - tui_app - INFO - [USER_ADMIN][UI] pick_user user_id=509 name='测试02'
+2026-01-22 10:17:45,426 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=509
+2026-01-22 10:17:45,427 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=509
+2026-01-22 10:17:45,504 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(509,)
+2026-01-22 10:17:45,554 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=0 cost_ms=127
+2026-01-22 10:17:45,554 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=0
+2026-01-22 10:17:54,395 - tui_app - INFO - [USER_ADMIN][UI] clear_form
+2026-01-22 10:18:40,557 - tui_app - INFO - [USER_ADMIN][UI] on_search keyword='测试02'
+2026-01-22 10:18:40,558 - download.db - INFO - [USER_ADMIN][DB_CALL] find_users_by_name_or_phone keyword='测试02'
+2026-01-22 10:18:40,558 - download.db - INFO - [USER_ADMIN][SQL] mode=name sql=SELECT id, name, phone, email, password, created_at, updated_at, avatar FROM users WHERE name = %s LIMIT 20 params=('测试02',)
+2026-01-22 10:18:40,709 - download.db - INFO - [USER_ADMIN][DB_RESULT] mode=name count=1 cost_ms=151
+2026-01-22 10:18:40,710 - tui_app - INFO - [USER_ADMIN][UI] search_result ok=True count=1
+2026-01-22 10:18:42,013 - tui_app - INFO - [USER_ADMIN][UI] pick_user user_id=509 name='测试02'
+2026-01-22 10:18:42,014 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=509
+2026-01-22 10:18:42,014 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=509
+2026-01-22 10:18:42,096 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(509,)
+2026-01-22 10:18:42,145 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=0 cost_ms=131
+2026-01-22 10:18:42,146 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=0
+2026-01-22 10:18:53,879 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=509
+2026-01-22 10:18:53,880 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=509
+2026-01-22 10:18:53,961 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(509,)
+2026-01-22 10:18:54,014 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=0 cost_ms=134
+2026-01-22 10:18:54,014 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=0
+2026-01-22 10:18:57,670 - tui_app - INFO - [USER_ADMIN][UI] bind_device user_id=509 device_id=123
+2026-01-22 10:18:57,671 - download.db - INFO - [USER_ADMIN][DB_CALL] add_device_binding user_id=509 device_id=123
+2026-01-22 10:18:57,751 - download.db - INFO - [USER_ADMIN][SQL] check_user sql=SELECT id FROM users WHERE id = %s LIMIT 1 params=(509,)
+2026-01-22 10:18:57,791 - download.db - INFO - [USER_ADMIN][SQL] check_device sql=SELECT id, name FROM devices WHERE deleted_at IS NULL AND id = %s LIMIT 1 params=(123,)
+2026-01-22 10:18:57,804 - download.db - INFO - [USER_ADMIN][SQL] check_duplicate sql=SELECT id FROM device_user WHERE user_id = %s AND device_id = %s AND (deleted_at IS NULL) LIMIT 1 params=(509, 123)
+2026-01-22 10:18:57,817 - download.db - INFO - [USER_ADMIN][SQL] insert_binding sql=INSERT INTO device_user (user_id, device_id, created_at, updated_at) VALUES (%s, %s, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) params=(509, 123)
+2026-01-22 10:18:57,853 - download.db - INFO - [USER_ADMIN][DB_RESULT] add_binding ok id=11331 cost_ms=182
+2026-01-22 10:18:57,854 - tui_app - INFO - [USER_ADMIN][UI] bind_device_result ok=True binding_id=11331
+2026-01-22 10:18:59,526 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=509
+2026-01-22 10:18:59,528 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=509
+2026-01-22 10:18:59,601 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(509,)
+2026-01-22 10:18:59,651 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=1 cost_ms=123
+2026-01-22 10:18:59,651 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=1
+2026-01-22 10:19:11,476 - tui_app - INFO - [USER_ADMIN][UI] on_search keyword='测试02'
+2026-01-22 10:19:11,477 - download.db - INFO - [USER_ADMIN][DB_CALL] find_users_by_name_or_phone keyword='测试02'
+2026-01-22 10:19:11,477 - download.db - INFO - [USER_ADMIN][SQL] mode=name sql=SELECT id, name, phone, email, password, created_at, updated_at, avatar FROM users WHERE name = %s LIMIT 20 params=('测试02',)
+2026-01-22 10:19:11,615 - download.db - INFO - [USER_ADMIN][DB_RESULT] mode=name count=1 cost_ms=138
+2026-01-22 10:19:11,615 - tui_app - INFO - [USER_ADMIN][UI] search_result ok=True count=1
+2026-01-22 10:19:13,175 - tui_app - INFO - [USER_ADMIN][UI] pick_user user_id=509 name='测试02'
+2026-01-22 10:19:13,177 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=509
+2026-01-22 10:19:13,177 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=509
+2026-01-22 10:19:13,283 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(509,)
+2026-01-22 10:19:13,335 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=1 cost_ms=158
+2026-01-22 10:19:13,335 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=1
+2026-01-22 10:19:27,797 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=509
+2026-01-22 10:19:27,798 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=509
+2026-01-22 10:19:27,883 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(509,)
+2026-01-22 10:19:27,936 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=1 cost_ms=138
+2026-01-22 10:19:27,936 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=1
+2026-01-22 10:21:36,421 - tui_app - INFO - [USER_ADMIN][UI] pick_user user_id=509 name='测试02'
+2026-01-22 10:21:36,422 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=509
+2026-01-22 10:21:36,422 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=509
+2026-01-22 10:21:36,531 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(509,)
+2026-01-22 10:21:36,587 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=1 cost_ms=165
+2026-01-22 10:21:36,587 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=1
+2026-01-22 10:21:41,112 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=509
+2026-01-22 10:21:41,114 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=509
+2026-01-22 10:21:41,189 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(509,)
+2026-01-22 10:21:41,247 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=1 cost_ms=133
+2026-01-22 10:21:41,248 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=1
+2026-01-22 10:21:42,339 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=509
+2026-01-22 10:21:42,340 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=509
+2026-01-22 10:21:42,422 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(509,)
+2026-01-22 10:21:42,475 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=1 cost_ms=135
+2026-01-22 10:21:42,475 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=1
+2026-01-22 10:21:42,966 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=509
+2026-01-22 10:21:42,968 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=509
+2026-01-22 10:21:43,063 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(509,)
+2026-01-22 10:21:43,118 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=1 cost_ms=150
+2026-01-22 10:21:43,118 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=1
+2026-01-22 10:21:43,707 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=509
+2026-01-22 10:21:43,708 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=509
+2026-01-22 10:21:43,788 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(509,)
+2026-01-22 10:21:43,843 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=1 cost_ms=135
+2026-01-22 10:21:43,844 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=1
+2026-01-22 10:21:45,295 - tui_app - INFO - [USER_ADMIN][UI] clear_form
+2026-01-22 10:21:52,984 - tui_app - INFO - [USER_ADMIN][UI] on_search keyword='测试02'
+2026-01-22 10:21:52,984 - download.db - INFO - [USER_ADMIN][DB_CALL] find_users_by_name_or_phone keyword='测试02'
+2026-01-22 10:21:52,984 - download.db - INFO - [USER_ADMIN][SQL] mode=name sql=SELECT id, name, phone, email, password, created_at, updated_at, avatar FROM users WHERE name = %s LIMIT 20 params=('测试02',)
+2026-01-22 10:21:53,117 - download.db - INFO - [USER_ADMIN][DB_RESULT] mode=name count=1 cost_ms=133
+2026-01-22 10:21:53,117 - tui_app - INFO - [USER_ADMIN][UI] search_result ok=True count=1
+2026-01-22 10:21:53,774 - tui_app - INFO - [USER_ADMIN][UI] pick_user user_id=509 name='测试02'
+2026-01-22 10:21:53,776 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=509
+2026-01-22 10:21:53,777 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=509
+2026-01-22 10:21:53,851 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(509,)
+2026-01-22 10:21:53,896 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=1 cost_ms=119
+2026-01-22 10:21:53,896 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=1
+2026-01-22 10:22:35,932 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 10:22:42,163 - tui_app - INFO - [USER_ADMIN][UI] on_search keyword='测试02'
+2026-01-22 10:22:42,164 - download.db - INFO - [USER_ADMIN][DB_CALL] find_users_by_name_or_phone keyword='测试02'
+2026-01-22 10:22:42,164 - download.db - INFO - [USER_ADMIN][SQL] mode=name sql=SELECT id, name, phone, email, password, created_at, updated_at, avatar FROM users WHERE name = %s LIMIT 20 params=('测试02',)
+2026-01-22 10:22:42,283 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-01-22 10:22:42,283 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-01-22 10:22:42,284 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-01-22 10:22:42,395 - download.db - INFO - [USER_ADMIN][DB_RESULT] mode=name count=1 cost_ms=231
+2026-01-22 10:22:42,396 - tui_app - INFO - [USER_ADMIN][UI] search_result ok=True count=1
+2026-01-22 10:22:43,315 - tui_app - INFO - [USER_ADMIN][UI] pick_user user_id=509 name='测试02'
+2026-01-22 10:22:43,316 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=509
+2026-01-22 10:22:43,317 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=509
+2026-01-22 10:22:43,396 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(509,)
+2026-01-22 10:22:43,445 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=1 cost_ms=128
+2026-01-22 10:22:43,445 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=1
+2026-01-22 10:27:32,356 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=509
+2026-01-22 10:27:32,358 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=509
+2026-01-22 10:27:32,479 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(509,)
+2026-01-22 10:27:32,535 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=1 cost_ms=177
+2026-01-22 10:27:32,535 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=1
+2026-01-22 10:27:41,910 - tui_app - INFO - [USER_ADMIN][UI] bind_device user_id=509 device_id=123
+2026-01-22 10:27:41,910 - download.db - INFO - [USER_ADMIN][DB_CALL] add_device_binding user_id=509 device_id=123
+2026-01-22 10:27:41,994 - download.db - INFO - [USER_ADMIN][SQL] check_user sql=SELECT id FROM users WHERE id = %s LIMIT 1 params=(509,)
+2026-01-22 10:27:42,037 - download.db - INFO - [USER_ADMIN][SQL] check_device sql=SELECT id, name FROM devices WHERE deleted_at IS NULL AND id = %s LIMIT 1 params=(123,)
+2026-01-22 10:27:42,050 - download.db - INFO - [USER_ADMIN][SQL] check_duplicate sql=SELECT id FROM device_user WHERE user_id = %s AND device_id = %s AND (deleted_at IS NULL) LIMIT 1 params=(509, 123)
+2026-01-22 10:27:42,068 - download.db - WARNING - [USER_ADMIN][BUSINESS] duplicate binding
+2026-01-22 10:27:42,080 - tui_app - INFO - [USER_ADMIN][UI] bind_device_result ok=False binding_id=None
+2026-01-22 10:38:24,379 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 10:38:30,372 - tui_app - INFO - [USER_ADMIN][UI] on_search keyword='测试02'
+2026-01-22 10:38:30,372 - download.db - INFO - [USER_ADMIN][DB_CALL] find_users_by_name_or_phone keyword='测试02'
+2026-01-22 10:38:30,372 - download.db - INFO - [USER_ADMIN][SQL] mode=name sql=SELECT id, name, phone, email, password, created_at, updated_at, avatar FROM users WHERE name = %s LIMIT 20 params=('测试02',)
+2026-01-22 10:38:30,476 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-01-22 10:38:30,477 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-01-22 10:38:30,477 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-01-22 10:38:30,574 - download.db - INFO - [USER_ADMIN][DB_RESULT] mode=name count=1 cost_ms=202
+2026-01-22 10:38:30,574 - tui_app - INFO - [USER_ADMIN][UI] search_result ok=True count=1
+2026-01-22 10:38:32,457 - tui_app - INFO - [USER_ADMIN][UI] pick_user user_id=509 name='测试02'
+2026-01-22 10:38:32,459 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=509
+2026-01-22 10:38:32,460 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=509
+2026-01-22 10:38:32,539 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(509,)
+2026-01-22 10:38:32,589 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=1 cost_ms=129
+2026-01-22 10:38:32,590 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=1
+2026-01-22 10:39:09,812 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=509
+2026-01-22 10:39:09,815 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=509
+2026-01-22 10:39:09,925 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(509,)
+2026-01-22 10:39:09,982 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=1 cost_ms=167
+2026-01-22 10:39:09,983 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=1
+2026-01-22 10:59:39,624 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 10:59:46,793 - tui_app - INFO - [USER_ADMIN][UI] on_search keyword='测试02'
+2026-01-22 10:59:46,794 - download.db - INFO - [USER_ADMIN][DB_CALL] find_users_by_name_or_phone keyword='测试02'
+2026-01-22 10:59:46,795 - download.db - INFO - [USER_ADMIN][SQL] mode=name sql=SELECT id, name, phone, email, password, created_at, updated_at, avatar FROM users WHERE name = %s LIMIT 20 params=('测试02',)
+2026-01-22 10:59:46,891 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-01-22 10:59:46,892 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-01-22 10:59:46,892 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-01-22 10:59:46,989 - download.db - INFO - [USER_ADMIN][DB_RESULT] mode=name count=1 cost_ms=195
+2026-01-22 10:59:46,990 - tui_app - INFO - [USER_ADMIN][UI] search_result ok=True count=1
+2026-01-22 10:59:48,058 - tui_app - INFO - [USER_ADMIN][UI] pick_user user_id=509 name='测试02'
+2026-01-22 10:59:48,062 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=509
+2026-01-22 10:59:48,062 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=509
+2026-01-22 10:59:48,146 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(509,)
+2026-01-22 10:59:48,199 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=1 cost_ms=137
+2026-01-22 10:59:48,199 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=1
+2026-01-22 10:59:50,986 - tui_app - INFO - [USER_ADMIN][UI] unbind_device(user_id=509, device_id=123)
+2026-01-22 10:59:52,430 - download.db - INFO - [USER_ADMIN][DB_CALL] delete_device_binding user_id=509 device_id=123
+2026-01-22 10:59:52,502 - download.db - INFO - [USER_ADMIN][SQL] delete_binding sql=DELETE FROM device_user WHERE user_id = %s AND device_id = %s params=(509, 123)
+2026-01-22 10:59:52,552 - download.db - INFO - [USER_ADMIN][DB_RESULT] delete_binding rows=1 cost_ms=122
+2026-01-22 10:59:52,552 - tui_app - INFO - [USER_ADMIN][UI] unbind_result ok=True deleted_rows=1
+2026-01-22 10:59:53,427 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=509
+2026-01-22 10:59:53,427 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=509
+2026-01-22 10:59:53,506 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(509,)
+2026-01-22 10:59:53,559 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=0 cost_ms=132
+2026-01-22 10:59:53,559 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=0
+2026-01-22 11:00:33,699 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=509
+2026-01-22 11:00:33,700 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=509
+2026-01-22 11:00:33,807 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(509,)
+2026-01-22 11:00:33,862 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=0 cost_ms=162
+2026-01-22 11:00:33,862 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=0
+2026-01-22 11:02:00,966 - tui_app - INFO - [USER_ADMIN][UI] bind_device user_id=509 device_id=123
+2026-01-22 11:02:00,966 - download.db - INFO - [USER_ADMIN][DB_CALL] add_device_binding user_id=509 device_id=123
+2026-01-22 11:02:01,080 - download.db - INFO - [USER_ADMIN][SQL] check_user sql=SELECT id FROM users WHERE id = %s LIMIT 1 params=(509,)
+2026-01-22 11:02:01,118 - download.db - INFO - [USER_ADMIN][SQL] check_device sql=SELECT id, name FROM devices WHERE deleted_at IS NULL AND id = %s LIMIT 1 params=(123,)
+2026-01-22 11:02:01,131 - download.db - INFO - [USER_ADMIN][SQL] check_duplicate sql=SELECT id FROM device_user WHERE user_id = %s AND device_id = %s AND (deleted_at IS NULL) LIMIT 1 params=(509, 123)
+2026-01-22 11:02:01,142 - download.db - INFO - [USER_ADMIN][SQL] insert_binding sql=INSERT INTO device_user (user_id, device_id, created_at, updated_at) VALUES (%s, %s, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) params=(509, 123)
+2026-01-22 11:02:01,170 - download.db - INFO - [USER_ADMIN][DB_RESULT] add_binding ok id=11332 cost_ms=204
+2026-01-22 11:02:01,170 - tui_app - INFO - [USER_ADMIN][UI] bind_device_result ok=True binding_id=11332
+2026-01-22 11:02:02,422 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=509
+2026-01-22 11:02:02,425 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=509
+2026-01-22 11:02:02,502 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(509,)
+2026-01-22 11:02:02,554 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=1 cost_ms=129
+2026-01-22 11:02:02,555 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=1
+2026-01-22 11:04:42,665 - tui_app - INFO - [USER_ADMIN][UI] unbind_device(user_id=509, device_id=123)
+2026-01-22 11:04:43,865 - download.db - INFO - [USER_ADMIN][DB_CALL] delete_device_binding user_id=509 device_id=123
+2026-01-22 11:04:43,968 - download.db - INFO - [USER_ADMIN][SQL] delete_binding sql=DELETE FROM device_user WHERE user_id = %s AND device_id = %s params=(509, 123)
+2026-01-22 11:04:44,026 - download.db - INFO - [USER_ADMIN][DB_RESULT] delete_binding rows=1 cost_ms=161
+2026-01-22 11:04:44,027 - tui_app - INFO - [USER_ADMIN][UI] unbind_result ok=True deleted_rows=1
+2026-01-22 11:04:45,017 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=509
+2026-01-22 11:04:45,017 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=509
+2026-01-22 11:04:45,851 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(509,)
+2026-01-22 11:04:45,904 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=0 cost_ms=887
+2026-01-22 11:04:45,905 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=0
+2026-01-22 11:06:18,875 - tui_app - INFO - [USER_ADMIN][UI] on_search keyword='15635912410'
+2026-01-22 11:06:18,877 - download.db - INFO - [USER_ADMIN][DB_CALL] find_users_by_name_or_phone keyword='15635912410'
+2026-01-22 11:06:18,878 - download.db - INFO - [USER_ADMIN][SQL] mode=phone sql=SELECT id, name, phone, email, password, created_at, updated_at, avatar FROM users WHERE phone = %s LIMIT 5 params=('15635912410',)
+2026-01-22 11:06:19,040 - download.db - INFO - [USER_ADMIN][DB_RESULT] mode=phone count=1 cost_ms=163
+2026-01-22 11:06:19,041 - tui_app - INFO - [USER_ADMIN][UI] search_result ok=True count=1
+2026-01-22 11:06:19,824 - tui_app - INFO - [USER_ADMIN][UI] pick_user user_id=506 name='版纳胸径环'
+2026-01-22 11:06:19,826 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=506
+2026-01-22 11:06:19,826 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=506
+2026-01-22 11:06:19,912 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(506,)
+2026-01-22 11:06:19,969 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=61 cost_ms=143
+2026-01-22 11:06:19,969 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=61
+2026-01-22 11:06:26,205 - tui_app - INFO - [USER_ADMIN][UI] clear_form
+2026-01-22 14:08:59,319 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 14:09:09,601 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-01-22 14:09:09,601 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-01-22 14:09:09,603 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-01-22 14:10:10,516 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 14:10:31,194 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 14:10:54,308 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 14:11:16,694 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 14:11:34,424 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 14:11:47,459 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-01-22 14:11:47,460 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-01-22 14:11:47,461 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-01-22 14:12:42,886 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 14:12:42,890 - download.async_downloader - INFO - 数据表时间范围: 2026-01-01 00:00:00 到 2026-01-31 23:59:59
+2026-01-22 14:12:42,896 - download.async_downloader - INFO - [10.0%] downloading: 2435 (1/1)
+2026-01-22 14:13:01,341 - download.async_downloader - INFO - [100.0%] Download completed
+2026-01-22 14:21:48,179 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 14:22:14,609 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-01-22 14:22:14,610 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-01-22 14:22:14,611 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-01-22 14:22:28,649 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 14:22:28,654 - download.async_downloader - INFO - 数据表时间范围: 2026-01-01 00:00:00 到 2026-01-31 23:59:59
+2026-01-22 14:22:28,662 - download.async_downloader - INFO - [10.0%] downloading: 2435 (1/1)
+2026-01-22 14:23:25,019 - download.async_downloader - INFO - 下载任务已取消
+2026-01-22 14:25:21,320 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 14:25:32,707 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-01-22 14:25:32,708 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-01-22 14:25:32,709 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-01-22 14:25:38,720 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 14:25:38,724 - download.async_downloader - INFO - 数据表时间范围: 2026-01-01 00:00:00 到 2026-01-31 23:59:59
+2026-01-22 14:25:38,728 - download.async_downloader - INFO - [10.0%] downloading: 2435 (1/1)
+2026-01-22 14:25:47,730 - download.async_downloader - INFO - [100.0%] Download completed
+2026-01-22 14:25:53,821 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 14:25:53,832 - download.async_downloader - INFO - 数据表时间范围: 2026-01-01 00:00:00 到 2026-01-31 23:59:59
+2026-01-22 14:25:53,840 - download.async_downloader - INFO - [10.0%] downloading: 2435 (1/1)
+2026-01-22 14:25:58,790 - download.async_downloader - INFO - [100.0%] Download completed
+2026-01-22 14:26:48,439 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 14:26:48,450 - download.async_downloader - INFO - 数据表时间范围: 2026-01-01 00:00:00 到 2026-01-31 23:59:59
+2026-01-22 14:26:48,457 - download.async_downloader - INFO - [10.0%] downloading: 2435 (1/1)
+2026-01-22 14:26:54,445 - download.async_downloader - INFO - [100.0%] Download completed
+2026-01-22 14:27:46,951 - tui_app - INFO - [USER_ADMIN][UI] on_search keyword='测试02'
+2026-01-22 14:27:46,953 - download.db - INFO - [USER_ADMIN][DB_CALL] find_users_by_name_or_phone keyword='测试02'
+2026-01-22 14:27:46,954 - download.db - INFO - [USER_ADMIN][SQL] mode=name sql=SELECT id, name, phone, email, password, created_at, updated_at, avatar FROM users WHERE name = %s LIMIT 20 params=('测试02',)
+2026-01-22 14:27:47,113 - download.db - INFO - [USER_ADMIN][DB_RESULT] mode=name count=1 cost_ms=160
+2026-01-22 14:27:47,113 - tui_app - INFO - [USER_ADMIN][UI] search_result ok=True count=1
+2026-01-22 14:27:47,672 - tui_app - INFO - [USER_ADMIN][UI] pick_user user_id=509 name='测试02'
+2026-01-22 14:27:47,674 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=509
+2026-01-22 14:27:47,674 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=509
+2026-01-22 14:27:47,751 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(509,)
+2026-01-22 14:27:47,802 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=0 cost_ms=128
+2026-01-22 14:27:47,803 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=0
+2026-01-22 14:27:59,809 - tui_app - INFO - [USER_ADMIN][UI] bind_device user_id=509 device_id=111
+2026-01-22 14:27:59,810 - download.db - INFO - [USER_ADMIN][DB_CALL] add_device_binding user_id=509 device_id=111
+2026-01-22 14:27:59,892 - download.db - INFO - [USER_ADMIN][SQL] check_user sql=SELECT id FROM users WHERE id = %s LIMIT 1 params=(509,)
+2026-01-22 14:27:59,930 - download.db - INFO - [USER_ADMIN][SQL] check_device sql=SELECT id, name FROM devices WHERE deleted_at IS NULL AND id = %s LIMIT 1 params=(111,)
+2026-01-22 14:27:59,942 - download.db - WARNING - [USER_ADMIN][BUSINESS] device not found
+2026-01-22 14:27:59,954 - tui_app - INFO - [USER_ADMIN][UI] bind_device_result ok=False binding_id=None
+2026-01-22 14:28:07,051 - tui_app - INFO - [USER_ADMIN][UI] bind_device user_id=509 device_id=123
+2026-01-22 14:28:07,053 - download.db - INFO - [USER_ADMIN][DB_CALL] add_device_binding user_id=509 device_id=123
+2026-01-22 14:28:07,134 - download.db - INFO - [USER_ADMIN][SQL] check_user sql=SELECT id FROM users WHERE id = %s LIMIT 1 params=(509,)
+2026-01-22 14:28:07,184 - download.db - INFO - [USER_ADMIN][SQL] check_device sql=SELECT id, name FROM devices WHERE deleted_at IS NULL AND id = %s LIMIT 1 params=(123,)
+2026-01-22 14:28:07,199 - download.db - INFO - [USER_ADMIN][SQL] check_duplicate sql=SELECT id FROM device_user WHERE user_id = %s AND device_id = %s AND (deleted_at IS NULL) LIMIT 1 params=(509, 123)
+2026-01-22 14:28:07,215 - download.db - INFO - [USER_ADMIN][SQL] insert_binding sql=INSERT INTO device_user (user_id, device_id, created_at, updated_at) VALUES (%s, %s, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) params=(509, 123)
+2026-01-22 14:28:07,244 - download.db - INFO - [USER_ADMIN][DB_RESULT] add_binding ok id=11333 cost_ms=191
+2026-01-22 14:28:07,244 - tui_app - INFO - [USER_ADMIN][UI] bind_device_result ok=True binding_id=11333
+2026-01-22 14:28:08,364 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=509
+2026-01-22 14:28:08,365 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=509
+2026-01-22 14:28:08,458 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(509,)
+2026-01-22 14:28:08,508 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=1 cost_ms=143
+2026-01-22 14:28:08,509 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=1
+2026-01-22 14:28:09,213 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=509
+2026-01-22 14:28:09,223 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=509
+2026-01-22 14:28:09,296 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(509,)
+2026-01-22 14:28:09,363 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=1 cost_ms=140
+2026-01-22 14:28:09,363 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=1
+2026-01-22 14:28:13,223 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=509
+2026-01-22 14:28:13,227 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=509
+2026-01-22 14:28:13,310 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(509,)
+2026-01-22 14:28:13,366 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=1 cost_ms=139
+2026-01-22 14:28:13,366 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=1
+2026-01-22 14:28:16,954 - tui_app - INFO - [USER_ADMIN][UI] unbind_device(user_id=509, device_id=123)
+2026-01-22 14:28:17,992 - download.db - INFO - [USER_ADMIN][DB_CALL] delete_device_binding user_id=509 device_id=123
+2026-01-22 14:28:18,072 - download.db - INFO - [USER_ADMIN][SQL] delete_binding sql=DELETE FROM device_user WHERE user_id = %s AND device_id = %s params=(509, 123)
+2026-01-22 14:28:18,131 - download.db - INFO - [USER_ADMIN][DB_RESULT] delete_binding rows=1 cost_ms=139
+2026-01-22 14:28:18,131 - tui_app - INFO - [USER_ADMIN][UI] unbind_result ok=True deleted_rows=1
+2026-01-22 14:28:18,840 - tui_app - INFO - [USER_ADMIN][UI] refresh_bindings user_id=509
+2026-01-22 14:28:18,841 - download.db - INFO - [USER_ADMIN][DB_CALL] list_bound_devices_for_user user_id=509
+2026-01-22 14:28:18,940 - download.db - INFO - [USER_ADMIN][SQL] list_bindings sql=SELECT du.device_id, d.name, du.created_at FROM device_user du LEFT JOIN devices d ON d.id = du.device_id AND d.deleted_at IS NULL WHERE du.user_id = %s AND (du.deleted_at IS NULL) ORDER BY du.device_id ASC params=(509,)
+2026-01-22 14:28:19,002 - download.db - INFO - [USER_ADMIN][DB_RESULT] list_bindings count=0 cost_ms=161
+2026-01-22 14:28:19,002 - tui_app - INFO - [USER_ADMIN][UI] list_bindings_result ok=True count=0
+2026-01-22 14:28:22,428 - tui_app - INFO - [USER_ADMIN][UI] clear_form
+2026-01-22 14:30:53,966 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 14:30:53,978 - download.async_downloader - INFO - 数据表时间范围: 2026-01-01 00:00:00 到 2026-01-31 23:59:59
+2026-01-22 14:30:53,988 - download.async_downloader - INFO - [10.0%] downloading: 2435 (1/2)
+2026-01-22 14:31:12,094 - download.async_downloader - INFO - [45.0%] downloading: 123 (2/2)
+2026-01-22 14:31:12,607 - download.async_downloader - INFO - [100.0%] Download completed
+2026-01-22 14:31:14,885 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 14:31:14,895 - download.async_downloader - INFO - 数据表时间范围: 2026-01-01 00:00:00 到 2026-01-31 23:59:59
+2026-01-22 14:31:14,908 - download.async_downloader - INFO - [10.0%] downloading: 2435 (1/2)
+2026-01-22 14:31:32,266 - download.async_downloader - INFO - [45.0%] downloading: 123 (2/2)
+2026-01-22 14:31:34,668 - download.async_downloader - INFO - [100.0%] Download completed
+2026-01-22 14:31:50,688 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 14:31:50,714 - download.async_downloader - INFO - 数据表时间范围: 2026-01-01 00:00:00 到 2026-01-31 23:59:59
+2026-01-22 14:31:50,728 - download.async_downloader - INFO - [10.0%] downloading: 2435 (1/2)
+2026-01-22 14:32:07,192 - download.async_downloader - INFO - [45.0%] downloading: 123 (2/2)
+2026-01-22 14:32:07,733 - download.async_downloader - INFO - [100.0%] Download completed
+2026-01-22 14:40:34,680 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 14:41:08,561 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-01-22 14:41:08,561 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-01-22 14:41:08,567 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-01-22 14:43:18,942 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 14:43:18,948 - download.async_downloader - INFO - 数据表时间范围: 2025-01-01 00:00:00 到 2025-01-31 23:59:59
+2026-01-22 14:43:18,956 - download.async_downloader - INFO - [10.0%] downloading: 2435 (1/3)
+2026-01-22 14:43:19,561 - download.async_downloader - INFO - [33.3%] downloading: 2433 (2/3)
+2026-01-22 14:43:20,728 - download.async_downloader - INFO - [56.7%] downloading: 2434 (3/3)
+2026-01-22 14:43:21,482 - download.async_downloader - INFO - [100.0%] Download completed
+2026-01-22 14:43:51,445 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 14:43:51,454 - download.async_downloader - INFO - 数据表时间范围: 2025-03-01 00:00:00 到 2025-03-31 23:59:59
+2026-01-22 14:43:51,463 - download.async_downloader - INFO - [10.0%] downloading: 2435 (1/3)
+2026-01-22 14:43:57,755 - download.async_downloader - INFO - [33.3%] downloading: 2433 (2/3)
+2026-01-22 14:43:58,152 - download.async_downloader - INFO - [56.7%] downloading: 2434 (3/3)
+2026-01-22 14:44:02,622 - download.async_downloader - INFO - [100.0%] Download completed
+2026-01-22 14:44:25,460 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 14:44:25,471 - download.async_downloader - INFO - 数据表时间范围: 2025-03-01 00:00:00 到 2025-03-31 23:59:59
+2026-01-22 14:44:25,481 - download.async_downloader - INFO - [10.0%] downloading: 2435 (1/3)
+2026-01-22 14:44:30,622 - download.async_downloader - INFO - [33.3%] downloading: 2433 (2/3)
+2026-01-22 14:44:31,022 - download.async_downloader - INFO - [56.7%] downloading: 2434 (3/3)
+2026-01-22 14:44:34,856 - download.async_downloader - INFO - [100.0%] Download completed
+2026-01-22 14:54:38,470 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 14:54:48,358 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-01-22 14:54:48,359 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-01-22 14:54:48,360 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-01-22 14:55:10,288 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 14:55:10,293 - download.async_downloader - INFO - 数据表时间范围: 2026-01-01 00:00:00 到 2026-01-31 23:59:59
+2026-01-22 14:55:10,301 - download.async_downloader - INFO - [10.0%] downloading: 2435 (1/3)
+2026-01-22 14:55:13,027 - download.async_downloader - INFO - [33.3%] downloading: 2433 (2/3)
+2026-01-22 14:55:13,434 - download.async_downloader - INFO - [56.7%] downloading: 2436 (3/3)
+2026-01-22 14:55:18,203 - download.async_downloader - INFO - [100.0%] Download completed
+2026-01-22 15:17:37,381 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 15:17:48,779 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-01-22 15:17:48,779 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-01-22 15:17:48,785 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-01-22 15:18:07,751 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 15:18:07,757 - download.async_downloader - INFO - 数据表时间范围: 2026-01-01 00:00:00 到 2026-01-31 23:59:59
+2026-01-22 15:18:07,763 - download.async_downloader - INFO - [10.0%] downloading: 2435 (1/2)
+2026-01-22 15:18:11,181 - download.async_downloader - INFO - [45.0%] downloading: 2436 (2/2)
+2026-01-22 15:18:17,122 - download.async_downloader - INFO - [100.0%] Download completed
+2026-01-22 15:18:31,219 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 15:18:31,226 - download.async_downloader - INFO - 数据表时间范围: 2026-01-01 00:00:00 到 2026-01-31 23:59:59
+2026-01-22 15:18:31,233 - download.async_downloader - INFO - [10.0%] downloading: 2435 (1/2)
+2026-01-22 15:18:34,245 - download.async_downloader - INFO - [45.0%] downloading: 2436 (2/2)
+2026-01-22 15:18:38,316 - download.async_downloader - INFO - [100.0%] Download completed
+2026-01-22 15:20:44,827 - download.async_downloader - INFO - OSS连接成功
+2026-01-22 15:42:28,753 - download.async_downloader - INFO - OSS连接成功
